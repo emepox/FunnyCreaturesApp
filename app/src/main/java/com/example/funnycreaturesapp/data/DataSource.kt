@@ -60,6 +60,7 @@ object DataSourceImpl: DataSource {
             category = Category.MONSTER,
             price = 33000,
             rating = 3.5,
+            isFavourite = true,
             img = { RectangleShape(RectangleShapeSize.BIG, "Article") },
         ),
         Article(
@@ -103,6 +104,7 @@ object DataSourceImpl: DataSource {
             category = Category.ACCESSORIES,
             price = 3000,
             rating = 1.5,
+            isFavourite = true,
             img = { RectangleShape(RectangleShapeSize.BIG, "Article") },
         )
 
@@ -116,6 +118,7 @@ data class Article(
     val category: Category,
     val price: Int,
     val rating: Double,
+    val isFavourite: Boolean = false,
     val img: @Composable () -> Unit,
 ) {
     enum class Category {

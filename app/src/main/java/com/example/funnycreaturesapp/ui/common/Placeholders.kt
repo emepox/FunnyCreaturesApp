@@ -36,26 +36,6 @@ fun RectangleShape(
     }
 }
 
-@Composable
-fun ArticleImgPlaceholder(
-    text: String,
-    modifier: Modifier,
-) {
-    Column(
-        modifier = modifier
-            .wrapContentSize(Alignment.Center)
-    ) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = modifier
-                .clip(androidx.compose.ui.graphics.RectangleShape)
-                .background(Color.LightGray)
-        ) {
-            Text(text = text)
-        }
-    }
-}
-
 fun rectangleSizeResolver(size: RectangleShapeSize): Dp =
     when(size) {
         RectangleShapeSize.BIG -> 120.dp

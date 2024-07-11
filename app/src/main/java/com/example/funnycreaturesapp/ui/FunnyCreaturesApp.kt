@@ -33,6 +33,7 @@ fun FunnyCreaturesApp(
     val currentScreen = FunnyCreaturesAppScreens.valueOf(
         backStackEntry?.destination?.route ?: FunnyCreaturesAppScreens.Home.name
     )
+    val articles = DataSourceImpl.articles
 
     Scaffold(
         topBar = {
@@ -65,7 +66,7 @@ fun FunnyCreaturesApp(
             composable(
                 route = FunnyCreaturesAppScreens.Home.name,
                 content = { Home(
-                    articles = DataSourceImpl.articles
+                    articles = articles
                 ) }
             )
             composable(
@@ -74,7 +75,11 @@ fun FunnyCreaturesApp(
             )
             composable(
                 route = FunnyCreaturesAppScreens.Favourites.name,
-                content = { Favourites() }
+                content = { Favourites(
+                    favouriteArticles = articles.filter {
+                        it.isFavourite
+                    }
+                ) }
             )
             composable(
                 route = FunnyCreaturesAppScreens.Profile.name,
