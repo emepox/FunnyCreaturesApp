@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.funnycreaturesapp.R
+import com.example.funnycreaturesapp.data.DataSourceImpl
 import com.example.funnycreaturesapp.ui.common.NavBar
 import com.example.funnycreaturesapp.ui.common.TopBar
 import com.example.funnycreaturesapp.ui.screens.Favourites
@@ -63,7 +64,9 @@ fun FunnyCreaturesApp(
         ) {
             composable(
                 route = FunnyCreaturesAppScreens.Home.name,
-                content = { Home() }
+                content = { Home(
+                    articles = DataSourceImpl.articles
+                ) }
             )
             composable(
                 route = FunnyCreaturesAppScreens.Search.name,
