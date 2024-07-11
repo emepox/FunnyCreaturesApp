@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FunnyCreaturesApp</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="favourites">Favourites</string>
+    <string name="profile">Profile</string>
+    <string name="back_button">Back Button</string>
+
+</resources>
