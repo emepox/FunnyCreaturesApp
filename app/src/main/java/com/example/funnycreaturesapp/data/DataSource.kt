@@ -17,6 +17,7 @@ object DataSourceImpl: DataSource {
             price = 200,
             rating = 4.5,
             img = { RectangleShape(RectangleShapeSize.BIG, "Article") },
+            description = "Mole hands with all their claws and little wrinkles. Mole hands with all their claws and little wrinkles. Mole hands with all their claws and little wrinkles. Mole hands with all their claws and little wrinkles. Mole hands with all their claws and little wrinkles. Mole hands with all their claws and little wrinkles. "
         ),
         Article(
             name = "Cabeza de dragón",
@@ -118,6 +119,7 @@ data class Article(
     val category: Category,
     val price: Int,
     val rating: Double,
+    val description: String = "Lorem Ipsum",
     val isFavourite: Boolean = false,
     val img: @Composable () -> Unit,
 ) {

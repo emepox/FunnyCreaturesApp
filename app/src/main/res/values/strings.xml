@@ -4,6 +4,7 @@
     <string name="search">Search</string>
     <string name="favourites">Favourites</string>
     <string name="profile">Profile</string>
+    <string name="article">Article</string>
     <string name="back_button">Back Button</string>
 
 </resources>

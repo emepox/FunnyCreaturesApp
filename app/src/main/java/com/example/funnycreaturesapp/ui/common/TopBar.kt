@@ -73,6 +73,7 @@ fun TopBar(
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = Color.LightGray
             ),
+            modifier = Modifier.padding(bottom = 10.dp)
         )
     }
 

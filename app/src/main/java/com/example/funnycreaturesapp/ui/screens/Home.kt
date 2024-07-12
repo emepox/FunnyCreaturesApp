@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,9 +20,11 @@ import com.example.funnycreaturesapp.ui.common.RectangleShapeSize
 import com.example.funnycreaturesapp.ui.theme.FunnyCreaturesAppTheme
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Home(
     articles: List<Article>,
+    onItemClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -29,12 +32,13 @@ fun Home(
             state = ScrollState(rememberScrollState().value)
         )
     ) {
+
         RectangleShape(
             size = RectangleShapeSize.SMALL,
             text = "Search bar",
             Modifier
                 .fillMaxWidth()
-                .padding(vertical = 10.dp)
+                .padding(bottom = 5.dp)
         )
 
         RectangleShape(
@@ -45,7 +49,7 @@ fun Home(
         Categories(
             onCategoryClicked = {}
         )
-        Articles(articles = articles)
+        Articles(articles = articles, onItemClicked = { onItemClicked() })
 
     }
 }
@@ -55,6 +59,6 @@ fun Home(
 @Composable
 fun GreetingPreview() {
     FunnyCreaturesAppTheme {
-        Home(DataSourceImpl.articles)
+        Home(DataSourceImpl.articles, {})
     }
 }

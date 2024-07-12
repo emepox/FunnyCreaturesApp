@@ -11,7 +11,8 @@ import com.example.funnycreaturesapp.ui.common.Articles
 @Composable
 fun Favourites(
     favouriteArticles: List<Article>,
+    onItemClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Articles(articles = favouriteArticles)
+    Articles(articles = favouriteArticles, onItemClicked = { onItemClicked() })
 }

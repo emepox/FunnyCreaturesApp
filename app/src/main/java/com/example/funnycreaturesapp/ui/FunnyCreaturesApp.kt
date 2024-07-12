@@ -2,6 +2,7 @@ package com.example.funnycreaturesapp.ui
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,6 +21,7 @@ import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.data.DataSourceImpl
 import com.example.funnycreaturesapp.ui.common.NavBar
 import com.example.funnycreaturesapp.ui.common.TopBar
+import com.example.funnycreaturesapp.ui.screens.Article
 import com.example.funnycreaturesapp.ui.screens.Favourites
 import com.example.funnycreaturesapp.ui.screens.Home
 import com.example.funnycreaturesapp.ui.screens.Profile
@@ -53,6 +55,7 @@ fun FunnyCreaturesApp(
                     .background(Color.Cyan)
             )
         },
+        contentWindowInsets = WindowInsets(0.dp),
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 20.dp, vertical = 40.dp)
@@ -66,24 +69,33 @@ fun FunnyCreaturesApp(
             composable(
                 route = FunnyCreaturesAppScreens.Home.name,
                 content = { Home(
-                    articles = articles
+                    articles = articles,
+                    onItemClicked = { navController.navigate(FunnyCreaturesAppScreens.Article.name) }
                 ) }
             )
             composable(
                 route = FunnyCreaturesAppScreens.Search.name,
-                content = { Search() }
+                content = { Search(
+                    articles = articles,
+                    onItemClicked = { navController.navigate(FunnyCreaturesAppScreens.Article.name) }
+                ) }
             )
             composable(
                 route = FunnyCreaturesAppScreens.Favourites.name,
                 content = { Favourites(
                     favouriteArticles = articles.filter {
                         it.isFavourite
-                    }
+                    },
+                    onItemClicked = { navController.navigate(FunnyCreaturesAppScreens.Article.name) }
                 ) }
             )
             composable(
                 route = FunnyCreaturesAppScreens.Profile.name,
                 content = { Profile() }
+            )
+            composable(
+                route = FunnyCreaturesAppScreens.Article.name,
+                content = { Article(article = articles[0])}
             )
         }
     }
@@ -94,4 +106,5 @@ enum class FunnyCreaturesAppScreens(@StringRes val title: Int) {
     Search(title = R.string.search),
     Favourites(title = R.string.favourites),
     Profile(title = R.string.profile),
+    Article(title = R.string.article),
 }
