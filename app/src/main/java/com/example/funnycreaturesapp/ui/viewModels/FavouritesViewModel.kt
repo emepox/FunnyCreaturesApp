@@ -1,4 +1,6 @@
 package com.example.funnycreaturesapp.ui.viewModels
 
-class FavouritesViewModel {
+import androidx.lifecycle.ViewModel
+
+class FavouritesViewModel: ViewModel() {
 }

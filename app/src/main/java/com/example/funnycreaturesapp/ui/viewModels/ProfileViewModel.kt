@@ -1,4 +1,6 @@
 package com.example.funnycreaturesapp.ui.viewModels
 
-class ProfileViewModel {
+import androidx.lifecycle.ViewModel
+
+class ProfileViewModel: ViewModel() {
 }

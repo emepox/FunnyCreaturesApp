@@ -24,6 +24,9 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,15 +34,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.funnycreaturesapp.R
-import com.example.funnycreaturesapp.data.Article
+import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
+import com.example.funnycreaturesapp.ui.viewModels.ArticleViewModel
 
 @Composable
 fun Article(
-    article: Article,
+    selectedArticle: ArticleUI,
+    onCartStateChange: (ArticleUI, Boolean) -> Unit,
     modifier: Modifier = Modifier,
-    isInOffer: Boolean = true,
 ) {
+
+    val viewModel: ArticleViewModel = viewModel(factory = ArticleViewModel.articleViewModelFactory(selectedArticle))
+    val state by viewModel.articleUI.collectAsState()
+
     Scaffold(
         bottomBar = {
             Divider()
@@ -50,13 +59,18 @@ fun Article(
                     .fillMaxWidth()
             ) {
                 Text(
-                    text = article.price.toString() + "€",
+                    text = state.price,
                     fontSize = 40.sp,
+                    color = Color.Black,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(20.dp)
                 )
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        viewModel.onAddToCartClicked()
+                        onCartStateChange(state, !state.isInCart)
+
+                              },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Green
                     ),
@@ -96,10 +110,10 @@ fun Article(
                     .fillMaxWidth()
             ) {
                 Text(
-                    text = article.name,
+                    text = state.name,
                     fontSize = 25.sp,
                 )
-                if (isInOffer) {
+                if (state.isInOffer) {
                     Card(
                         colors = CardDefaults.cardColors(
                             containerColor = Color.Red,
@@ -117,7 +131,7 @@ fun Article(
                 AssistChip(
                     onClick = { },
                     label = {
-                        Text(text = article.rating.toString())
+                        Text(text = state.rating)
                     },
                     leadingIcon = { Image(
                         painter = painterResource(id = R.drawable.baseline_grade),
@@ -125,7 +139,7 @@ fun Article(
                     )},
                 )
             }
-            Text(text = article.description)
+            Text(text = state.description)
 
         }
 

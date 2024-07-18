@@ -1,4 +1,6 @@
 package com.example.funnycreaturesapp.ui.viewModels
 
-class SearchViewModel {
+import androidx.lifecycle.ViewModel
+
+class SearchViewModel: ViewModel() {
 }

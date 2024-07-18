@@ -21,22 +21,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.Navigator
 import com.example.funnycreaturesapp.R
-import com.example.funnycreaturesapp.data.Article
+import com.example.funnycreaturesapp.data.DataSource
+import com.example.funnycreaturesapp.data.DataSourceArticle
 import com.example.funnycreaturesapp.data.DataSourceImpl
-import com.example.funnycreaturesapp.ui.FunnyCreaturesAppScreens
+import com.example.funnycreaturesapp.data.mappers.DataSourceArticleToUiArticle
+import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ArticleCard(
-    onItemClicked: (Int) -> Unit,
-    item: Article,
+    onItemClicked: (String) -> Unit,
+    item: ArticleUI,
 ) {
     Card(
         onClick = {
-            onItemClicked(0)
+            onItemClicked(item.id)
         },
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 5.dp),
         modifier = Modifier
@@ -78,7 +78,7 @@ fun ArticleCard(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = item.price.toString() + "€",
+                        text = item.price + "€",
                     )
                     Row(
                         horizontalArrangement = Arrangement.End,
@@ -89,7 +89,7 @@ fun ArticleCard(
                             contentDescription = "Rating"
                         )
                         Text(
-                            text = item.rating.toString(),
+                            text = item.rating,
                         )
                     }
                 }
@@ -101,5 +101,8 @@ fun ArticleCard(
 @Preview
 @Composable
 fun ArticlePreview() {
-    ArticleCard(item = DataSourceImpl.articles[0], onItemClicked = {})
+    ArticleCard(
+        item = DataSourceArticleToUiArticle.mapToUiModel(DataSourceImpl.dataSourceArticles[0]),
+        onItemClicked = {}
+    )
 }

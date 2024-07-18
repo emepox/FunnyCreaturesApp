@@ -1,16 +1,13 @@
 package com.example.funnycreaturesapp.ui.screens
 
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.funnycreaturesapp.data.Article
 import com.example.funnycreaturesapp.ui.common.Articles
+import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
 
 @Composable
 fun Favourites(
-    favouriteArticles: List<Article>,
+    favouriteArticles: List<ArticleUI>,
     onItemClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {

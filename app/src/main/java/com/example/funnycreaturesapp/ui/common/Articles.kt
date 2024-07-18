@@ -1,6 +1,5 @@
 package com.example.funnycreaturesapp.ui.common
 
-import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -11,15 +10,14 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import com.example.funnycreaturesapp.data.Article
 import com.example.funnycreaturesapp.data.DataSourceImpl
-import com.example.funnycreaturesapp.ui.FunnyCreaturesAppScreens
+import com.example.funnycreaturesapp.data.mappers.DataSourceArticleToUiArticle
+import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
 
 @Composable
 fun Articles(
-    articles: List<Article>,
-    onItemClicked: () -> Unit,
+    articles: List<ArticleUI>,
+    onItemClicked: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
@@ -33,12 +31,15 @@ fun Articles(
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         modifier = modifier.height(screenHeight.dp)
-        //columns = GridCells.Adaptive((screenWidth / 2).dp)
     ) {
         items(
             count = articles.size,
         ) { itemIndex ->
-            ArticleCard(item = articles[itemIndex], onItemClicked = { onItemClicked() })
+            ArticleCard(
+                item = articles[itemIndex],
+                onItemClicked = {
+                    onItemClicked(articles[itemIndex].id)
+                })
         }
     }
 }
@@ -46,7 +47,9 @@ fun Articles(
 @Preview
 @Composable
 fun ArticlesPreview() {
-    Articles(articles = DataSourceImpl.articles, onItemClicked = {})
+    Articles(
+        articles = DataSourceArticleToUiArticle.mapToUiModelList(DataSourceImpl.dataSourceArticles),
+        onItemClicked = {})
 }
 
 

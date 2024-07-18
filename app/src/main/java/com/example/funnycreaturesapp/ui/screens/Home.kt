@@ -6,25 +6,24 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.funnycreaturesapp.data.Article
 import com.example.funnycreaturesapp.data.DataSourceImpl
+import com.example.funnycreaturesapp.data.mappers.DataSourceArticleToUiArticle
 import com.example.funnycreaturesapp.ui.common.Articles
 import com.example.funnycreaturesapp.ui.common.Categories
 import com.example.funnycreaturesapp.ui.common.RectangleShape
 import com.example.funnycreaturesapp.ui.common.RectangleShapeSize
 import com.example.funnycreaturesapp.ui.theme.FunnyCreaturesAppTheme
+import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Home(
-    articles: List<Article>,
-    onItemClicked: () -> Unit,
+    articles: List<ArticleUI>,
+    onItemClicked: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -49,7 +48,12 @@ fun Home(
         Categories(
             onCategoryClicked = {}
         )
-        Articles(articles = articles, onItemClicked = { onItemClicked() })
+        Articles(
+            articles = articles,
+            onItemClicked = { articleId ->
+                onItemClicked(articleId)
+            }
+        )
 
     }
 }
@@ -59,6 +63,6 @@ fun Home(
 @Composable
 fun GreetingPreview() {
     FunnyCreaturesAppTheme {
-        Home(DataSourceImpl.articles, {})
+        Home(DataSourceArticleToUiArticle.mapToUiModelList(DataSourceImpl.dataSourceArticles), {})
     }
 }
