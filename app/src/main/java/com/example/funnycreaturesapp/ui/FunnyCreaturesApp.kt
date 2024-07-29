@@ -38,11 +38,10 @@ fun FunnyCreaturesApp(
     )
     val repository: List<DataSourceArticle> = DataSourceImpl.dataSourceArticles
     val viewModel: FunnyCreaturesAppViewModel = viewModel(factory = FunnyCreaturesAppViewModel.funnyCreaturesAppViewModelFactory(repository))
-
     val articles by viewModel.articles.collectAsState()
     val articlesInCart by viewModel.articlesInCart.collectAsState()
 
-
+    println("TESTING - list - $articlesInCart")
     Scaffold(
         topBar = {
             TopBar(
@@ -114,12 +113,8 @@ fun FunnyCreaturesApp(
                     selectedArticle?.let { article ->
                         Article(
                             selectedArticle = article,
-                            onCartStateChange = { article, inCart ->
-                                if (inCart) {
-                                    viewModel.addToCart(article)
-                                } else {
-                                    viewModel.removeFromCart(article)
-                                }
+                            onAddClicked = { addedArticle, amount ->
+                                viewModel.addToCart(addedArticle, amount)
                             }
                         )
                     }

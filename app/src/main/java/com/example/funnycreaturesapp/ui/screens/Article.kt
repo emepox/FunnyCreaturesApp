@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
@@ -23,17 +25,23 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
@@ -42,11 +50,13 @@ import com.example.funnycreaturesapp.ui.viewModels.ArticleViewModel
 @Composable
 fun Article(
     selectedArticle: ArticleUI,
-    onCartStateChange: (ArticleUI, Boolean) -> Unit,
+    onAddClicked: (ArticleUI, Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
-    val viewModel: ArticleViewModel = viewModel(factory = ArticleViewModel.articleViewModelFactory(selectedArticle))
+    val viewModel: ArticleViewModel =
+        viewModel(factory = ArticleViewModel.articleViewModelFactory(selectedArticle))
+
     val state by viewModel.articleUI.collectAsState()
 
     Scaffold(
@@ -54,30 +64,43 @@ fun Article(
             Divider()
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
+                horizontalArrangement = Arrangement.SpaceEvenly,
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
+                var amount by remember { mutableStateOf("1") }
+
                 Text(
-                    text = state.price,
+                    text = state.price + "€",
                     fontSize = 40.sp,
                     color = Color.Black,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(20.dp)
+                    modifier = Modifier.padding(10.dp)
                 )
+
+                TextField(
+                    value = amount,
+                    onValueChange = { input ->
+                        if (input.length <= 2 && input.isDigitsOnly())
+                            amount = input
+                    },
+                    modifier = Modifier.width(60.dp),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    singleLine = true,
+                    placeholder = { Text(text = "1") }
+                )
+
                 Button(
                     onClick = {
-                        viewModel.onAddToCartClicked()
-                        onCartStateChange(state, !state.isInCart)
-
-                              },
+                        onAddClicked(selectedArticle, amount.toInt())
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Green
                     ),
                     modifier = Modifier,
                 ) {
                     Text(
-                        text = "Add to cart",
+                        text = "Add",
                         fontSize = 20.sp,
                         color = Color.Black,
                         modifier = Modifier.padding(10.dp)
@@ -133,10 +156,12 @@ fun Article(
                     label = {
                         Text(text = state.rating)
                     },
-                    leadingIcon = { Image(
-                        painter = painterResource(id = R.drawable.baseline_grade),
-                        contentDescription = "Rating"
-                    )},
+                    leadingIcon = {
+                        Image(
+                            painter = painterResource(id = R.drawable.baseline_grade),
+                            contentDescription = "Rating"
+                        )
+                    },
                 )
             }
             Text(text = state.description)

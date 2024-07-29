@@ -1,6 +1,10 @@
 package com.example.funnycreaturesapp.ui.viewModels
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.funnycreaturesapp.data.DataSourceArticle.Category
@@ -18,12 +22,6 @@ class ArticleViewModel(
     private var _articleUiState = MutableStateFlow(article)
     val articleUI: StateFlow<ArticleUI> = _articleUiState.asStateFlow()
 
-    fun onAddToCartClicked() {
-        _articleUiState.value = _articleUiState.value.copy(
-            isInCart = !_articleUiState.value.isInCart
-        )
-    }
-
     companion object {
         fun articleViewModelFactory(uiArticleModel: ArticleUI): ViewModelProvider.Factory {
             return object : ViewModelProvider.Factory {
@@ -40,14 +38,13 @@ class ArticleViewModel(
 }
 
 data class ArticleUI(
-    val id: String = UUID.randomUUID().toString(),
-    val name: String = "Article",
-    val category: Category = MONSTER,
-    val price: String = "0",
-    val rating: String = "0",
-    val description: String = "",
-    val img: @Composable () -> Unit = {},
-    val isInOffer: Boolean = false,
-    val isFavourite: Boolean = false,
-    val isInCart: Boolean = false,
+    val id: String,
+    val name: String,
+    val category: Category,
+    val price: String,
+    val rating: String,
+    val description: String,
+    val img: @Composable () -> Unit,
+    val isInOffer: Boolean,
+    val isFavourite: Boolean,
 )

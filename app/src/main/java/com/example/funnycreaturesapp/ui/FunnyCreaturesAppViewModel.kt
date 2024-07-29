@@ -21,27 +21,19 @@ class FunnyCreaturesAppViewModel(repository: List<DataSourceArticle>) : ViewMode
     val selectedArticle: StateFlow<ArticleUI?> = _selectedArticle.asStateFlow()
 
     init {
+        // Call the articles repository. Assign it to the _articles variable.
         _articles.value = DataSourceArticleToUiArticle.mapToUiModelList(repository)
+        println("TESTING: FunnyCreaturesAppViewModel - articles in cart on init: ${articlesInCart.value.size}")
     }
 
-    fun addToCart(articleUI: ArticleUI) {
-        _articlesInCart.value += articleUI
-        updateArticleInList(articleUI.copy(isInCart = true))
-    }
-
-    fun removeFromCart(articleUI: ArticleUI) {
-        _articlesInCart.value -= articleUI
-        updateArticleInList(articleUI.copy(isInCart = false))
+    fun addToCart(articleUI: ArticleUI, amount: Int) {
+        repeat(amount) {
+            _articlesInCart.value += articleUI
+        }
     }
 
     fun selectArticle(articleId: String) {
         _selectedArticle.value = _articles.value.find { it.id == articleId }
-    }
-
-    private fun updateArticleInList(updatedArticle: ArticleUI) {
-        _articles.value = _articles.value.map { article ->
-            if(article.id == updatedArticle.id) updatedArticle else article
-        }
     }
 
     companion object {

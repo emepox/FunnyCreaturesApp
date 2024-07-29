@@ -17,7 +17,6 @@ object DataSourceArticleToUiArticle {
             img = {},
             isInOffer = false,
             isFavourite = false,
-            isInCart = false,
         )
     }
 
