@@ -85,7 +85,7 @@ fun FunnyCreaturesApp(
                 route = FunnyCreaturesAppScreens.Search.name,
                 content = {
                     Search(
-                        articles = articles,
+                        listOfArticles = articles,
                         onItemClicked = { navController.navigate(FunnyCreaturesAppScreens.Article.name) }
                     )
                 }

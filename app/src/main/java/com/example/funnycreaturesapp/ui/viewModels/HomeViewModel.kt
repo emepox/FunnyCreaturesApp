@@ -25,12 +25,12 @@ class HomeViewModel(listOfArticles: List<ArticleUI>) : ViewModel() {
     }
 
     companion object {
-        fun homeViewModelFactory(articles: List<ArticleUI>): ViewModelProvider.Factory {
+        fun homeViewModelFactory(listOfArticles: List<ArticleUI>): ViewModelProvider.Factory {
             return object : ViewModelProvider.Factory {
                 @Suppress("UNCHECKED_CAST")
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
                     if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-                        return HomeViewModel(articles) as T
+                        return HomeViewModel(listOfArticles) as T
                     }
                     throw IllegalArgumentException("Unknown ViewModel class")
                 }
