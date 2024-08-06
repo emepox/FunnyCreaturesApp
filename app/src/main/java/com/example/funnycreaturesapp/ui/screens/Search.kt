@@ -27,7 +27,7 @@ fun Search(
         active = true,
         onActiveChange = {},
     ) {
-        Articles(articles = articles.filter { it.name == query },
+        Articles(articles = articles.filter { it.name.contains(query) },
             onItemClicked = { onItemClicked() }
         )
     }

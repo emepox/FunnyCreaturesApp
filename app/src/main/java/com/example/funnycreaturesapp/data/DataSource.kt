@@ -14,8 +14,8 @@ data class DataSourceArticle(
     val category: Category,
     val price: Double,
     val rating: Double,
+    val img: String,
     val description: String = "Lorem Ipsum",
-    val img: @Composable () -> Unit,
     val isInOffer: Boolean = false,
 ) {
     enum class Category {
@@ -23,105 +23,156 @@ data class DataSourceArticle(
     }
 }
 
-object DataSourceImpl: DataSource {
+object DataSourceImpl : DataSource {
     override val dataSourceArticles: List<DataSourceArticle> = listOf(
         DataSourceArticle(
-            name = "Manos de topo",
+            name = "Alimaña",
             category = Category.FOOD,
             price = 200.00,
             rating = 4.5,
-            img = { RectangleShape(RectangleShapeSize.BIG, "Article") },
+            img = "alimaña",
             description = "Mole hands with all their claws and little wrinkles. Mole hands with all their claws and little wrinkles. Mole hands with all their claws and little wrinkles. Mole hands with all their claws and little wrinkles. Mole hands with all their claws and little wrinkles. Mole hands with all their claws and little wrinkles. "
         ),
         DataSourceArticle(
-            name = "Cabeza de dragón",
+            name = "Dragonino",
             category = Category.PART,
             price = 200.00,
             rating = 4.8,
-            img = { RectangleShape(RectangleShapeSize.BIG, "Article") },
-
-            ),
+            img = "dragonino",
+        ),
         DataSourceArticle(
             name = "Hominino",
             category = Category.MONSTER,
             price = 200.00,
             rating = 3.5,
-            img = { RectangleShape(RectangleShapeSize.BIG, "Article") },
+            img = "hominino",
+        ),
+        DataSourceArticle(
+            name = "Entrañas",
+            category = Category.FOOD,
+            price = 200.00,
+            rating = 1.5,
+            img = "entrañas",
         ),
         DataSourceArticle(
             name = "Jaula",
             category = Category.ACCESSORIES,
             price = 200.00,
             rating = 1.5,
-            img = { RectangleShape(RectangleShapeSize.BIG, "Article") },
+            img = "jaula",
         ),
         DataSourceArticle(
-            name = "Manos de topo",
+            name = "Alimaña",
             category = Category.FOOD,
             price = 200.00,
             rating = 4.5,
-            img = { RectangleShape(RectangleShapeSize.BIG, "Article") },
+            img = "alimaña",
         ),
         DataSourceArticle(
-            name = "Cabeza de dragón",
+            name = "Dragonino",
             category = Category.PART,
             price = 200.00,
             rating = 4.8,
-            img = { RectangleShape(RectangleShapeSize.BIG, "Article") },
-
-            ),
+            img = "dragonino",
+        ),
         DataSourceArticle(
             name = "Hominino",
             category = Category.MONSTER,
             price = 200.00,
             rating = 3.5,
-            img = { RectangleShape(RectangleShapeSize.BIG, "Article") },
+            img = "hominino",
         ),
         DataSourceArticle(
             name = "Jaula",
             category = Category.ACCESSORIES,
             price = 200.00,
             rating = 1.5,
-            img = { RectangleShape(RectangleShapeSize.BIG, "Article") },
+            img = "jaula",
+        ),
+        DataSourceArticle(
+            name = "Alimaña",
+            category = Category.FOOD,
+            price = 200.00,
+            rating = 1.5,
+            img = "alimaña",
         ),
         DataSourceArticle(
             name = "Jaula",
             category = Category.ACCESSORIES,
             price = 200.00,
             rating = 1.5,
-            img = { RectangleShape(RectangleShapeSize.BIG, "Article") },
+            img = "jaula",
         ),
         DataSourceArticle(
-            name = "Manos de topo",
+            name = "Alimaña",
             category = Category.FOOD,
             price = 200.00,
             rating = 4.5,
-            img = { RectangleShape(RectangleShapeSize.BIG, "Article") },
+            img = "alimaña",
         ),
         DataSourceArticle(
-            name = "Cabeza de dragón",
+            name = "Dragonino",
             category = Category.PART,
             price = 200.00,
             rating = 4.8,
-            img = { RectangleShape(RectangleShapeSize.BIG, "Article") },
-
-            ),
+            img = "dragonino",
+        ),
         DataSourceArticle(
             name = "Hominino",
             category = Category.MONSTER,
             price = 200.00,
             rating = 3.5,
-            img = { RectangleShape(RectangleShapeSize.BIG, "Article") },
+            img = "hominino",
         ),
         DataSourceArticle(
             name = "Jaula",
             category = Category.ACCESSORIES,
             price = 200.00,
             rating = 1.5,
-            img = { RectangleShape(RectangleShapeSize.BIG, "Article") },
-        )
+            img = "jaula",
+        ),
+        DataSourceArticle(
+            name = "Alimaña",
+            category = Category.FOOD,
+            price = 200.00,
+            rating = 1.5,
+            img = "alimaña",
+        ),
 
+        DataSourceArticle(
+            name = "Entrañas",
+            category = Category.FOOD,
+            price = 200.00,
+            rating = 1.5,
+            img = "entrañas",
+        ),
+    )
+}
+
+val listOfUrlImages = listOf(
+    "dragonino_0",
+    "dragonino_1",
+    "dragonino_2",
+    "dragonino_3",
+    "dragonino_4",
+    "dragonino_5",
+    "dragonino_6",
+    "dragonino_7",
+    "dragonino_8",
+    "dragonino_9",
+    "alimaña_0",
+    "alimaña_1",
+    "acuanino_0",
+    "avinino_0",
+    "avinino_1",
+    "avinino_2",
+    "avinino_3",
+    "hominino_0",
+    "hominino_1",
+    "jaula_0",
+    "jaula_1",
+    "jaula_2",
+    "entrañas_0",
+    "entrañas_1",
 
     )
-
-}

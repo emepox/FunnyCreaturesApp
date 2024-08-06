@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -36,6 +37,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -43,6 +45,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
+import coil.imageLoader
 import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
 import com.example.funnycreaturesapp.ui.viewModels.ArticleViewModel
@@ -119,12 +123,25 @@ fun Article(
                 )
         ) {
             Box(
+                contentAlignment = Alignment.BottomEnd,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(300.dp)
-                    .background(Color.Yellow)
+                    .aspectRatio(1f)
                     .border(BorderStroke(2.dp, Color.Gray))
-            ) {}
+            ) {
+                AsyncImage(
+                    model = selectedArticle.img,
+                    contentDescription = selectedArticle.name,
+                    imageLoader = LocalContext.current.imageLoader,
+                    )
+                Image(
+                    painter = painterResource(
+                        id = if (selectedArticle.isFavourite) R.drawable.baseline_favorite else R.drawable.baseline_favorite_empty
+                    ),
+                    contentDescription = "Is favourite",
+                    modifier = Modifier.padding(10.dp),
+                )
+            }
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,

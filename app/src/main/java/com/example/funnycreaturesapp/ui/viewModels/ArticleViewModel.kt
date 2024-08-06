@@ -44,7 +44,7 @@ data class ArticleUI(
     val price: String,
     val rating: String,
     val description: String,
-    val img: @Composable () -> Unit,
+    val img: String,
     val isInOffer: Boolean,
     val isFavourite: Boolean,
 )
