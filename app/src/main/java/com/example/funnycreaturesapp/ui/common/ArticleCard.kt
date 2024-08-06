@@ -1,7 +1,6 @@
 package com.example.funnycreaturesapp.ui.common
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,23 +15,16 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.imageLoader
 import com.example.funnycreaturesapp.R
-import com.example.funnycreaturesapp.data.DataSource
-import com.example.funnycreaturesapp.data.DataSourceArticle
 import com.example.funnycreaturesapp.data.DataSourceImpl
 import com.example.funnycreaturesapp.data.mappers.DataSourceArticleToUiArticle
 import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
@@ -62,7 +54,6 @@ fun ArticleCard(
                         .fillMaxWidth()
                         .aspectRatio(1f)
                 ) {
-                    println("TESTING - " +item.img)
                     AsyncImage(
                         model = item.img,
                         contentDescription = item.name,

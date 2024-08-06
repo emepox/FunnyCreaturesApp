@@ -23,7 +23,6 @@ class FunnyCreaturesAppViewModel(repository: List<DataSourceArticle>) : ViewMode
     init {
         // Call the articles repository. Assign it to the _articles variable.
         _articles.value = DataSourceArticleToUiArticle.mapToUiModelList(repository)
-        println("TESTING: FunnyCreaturesAppViewModel - articles in cart on init: ${articlesInCart.value.size}")
     }
 
     fun addToCart(articleUI: ArticleUI, amount: Int) {

@@ -41,7 +41,6 @@ fun FunnyCreaturesApp(
     val articles by viewModel.articles.collectAsState()
     val articlesInCart by viewModel.articlesInCart.collectAsState()
 
-    println("TESTING - list - $articlesInCart")
     Scaffold(
         topBar = {
             TopBar(
@@ -74,7 +73,7 @@ fun FunnyCreaturesApp(
                 route = FunnyCreaturesAppScreens.Home.name,
                 content = {
                     Home(
-                        articles = articles,
+                        listOfArticles = articles,
                         onItemClicked = { articleId ->
                             viewModel.selectArticle(articleId)
                             navController.navigate(FunnyCreaturesAppScreens.Article.name)

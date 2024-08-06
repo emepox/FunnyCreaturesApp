@@ -19,7 +19,8 @@ import com.example.funnycreaturesapp.data.DataSourceArticle.*
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Categories(
-    onCategoryClicked: () -> Unit,
+    onCategoryClicked: (Category) -> Unit,
+    onSeeAllClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -35,7 +36,7 @@ fun Categories(
             Text(
                 text = "See all",
                 modifier = Modifier.clickable {
-                    // TODO
+                    onSeeAllClicked()
                 }
             )
         }
@@ -45,7 +46,9 @@ fun Categories(
             items(categories.size) {
                 FilterChip(
                     selected = false,
-                    onClick = { onCategoryClicked() },
+                    onClick = {
+                        onCategoryClicked(categories[it])
+                    },
                     label = {
                         Text(text = categories[it].name)
                     },

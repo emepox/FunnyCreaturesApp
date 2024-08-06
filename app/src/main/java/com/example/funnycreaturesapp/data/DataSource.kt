@@ -1,9 +1,6 @@
 package com.example.funnycreaturesapp.data
 
-import androidx.compose.runtime.Composable
 import com.example.funnycreaturesapp.data.DataSourceArticle.Category
-import com.example.funnycreaturesapp.ui.common.RectangleShape
-import com.example.funnycreaturesapp.ui.common.RectangleShapeSize
 
 interface DataSource {
     val dataSourceArticles: List<DataSourceArticle>

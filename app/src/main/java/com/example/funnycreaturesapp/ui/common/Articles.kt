@@ -21,9 +21,7 @@ fun Articles(
     modifier: Modifier = Modifier,
 ) {
 
-    val context = LocalContext.current
     val configuration = LocalConfiguration.current
-    val screenWidth = configuration.smallestScreenWidthDp
     val screenHeight = configuration.screenHeightDp
 
     LazyVerticalGrid(
