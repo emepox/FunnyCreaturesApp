@@ -18,6 +18,10 @@ data class DataSourceArticle(
     enum class Category {
         MONSTER, FOOD, PART, ACCESSORIES,
     }
+
+    enum class Name {
+        DRAGONINO, HOMININO, AVININO, ENTRAÑAS, CASQUERÍA, JAULA,
+    }
 }
 
 object DataSourceImpl : DataSource {
@@ -173,3 +177,7 @@ val listOfUrlImages = listOf(
     "entrañas_1",
 
     )
+
+val listOfAds = listOf(
+    "ad_casquería_0",
+)

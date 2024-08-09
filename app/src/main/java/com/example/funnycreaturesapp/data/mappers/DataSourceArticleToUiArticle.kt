@@ -1,8 +1,8 @@
 package com.example.funnycreaturesapp.data.mappers
 
 import com.example.funnycreaturesapp.data.DataSourceArticle
-import com.example.funnycreaturesapp.data.listOfUrlImages
 import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
+import com.example.funnycreaturesapp.utils.RemoteImageUploader.uploadRemoteImage
 import java.util.UUID
 
 object DataSourceArticleToUiArticle {
@@ -15,7 +15,7 @@ object DataSourceArticleToUiArticle {
             price = dataSourceArticle.price.toString(),
             rating = dataSourceArticle.rating.toString(),
             description = dataSourceArticle.description,
-            img = assignUrlToImage(dataSourceArticle.img),
+            img = uploadRemoteImage(dataSourceArticle.img),
             isInOffer = false,
             isFavourite = false,
         )
@@ -24,16 +24,5 @@ object DataSourceArticleToUiArticle {
     fun mapToUiModelList(dataSourceArticle: List<DataSourceArticle>): List<ArticleUI> {
         return dataSourceArticle.map { mapToUiModel(it) }
     }
-
-    private fun getRandomImage(partialUrl: String): String? =
-        listOfUrlImages.filter { it.contains(partialUrl) }.randomOrNull()
-
-    private fun assignUrlToImage(partialUrl: String): String =
-        URL_PREFIX + (getRandomImage(partialUrl) ?: NO_IMAGE_PLACEHOLDER) + EXTENSION
-
-    private const val EXTENSION = ".png"
-    private const val NO_IMAGE_PLACEHOLDER = "image_placeholder"
-    private const val URL_PREFIX =
-        "https://raw.githubusercontent.com/emepox/emepox.github.io/master/assets/"
 
 }

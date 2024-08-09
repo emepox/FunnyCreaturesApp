@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.funnycreaturesapp.data.DataSourceArticle.*
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Categories(
     onCategoryClicked: (Category) -> Unit,
@@ -24,7 +23,7 @@ fun Categories(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier.padding(vertical = 5.dp)
+        modifier.padding(vertical = 10.dp)
     ) {
 
         Row(

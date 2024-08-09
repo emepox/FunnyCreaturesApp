@@ -17,6 +17,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.data.DataSourceArticle
 import com.example.funnycreaturesapp.data.DataSourceImpl
@@ -31,13 +32,14 @@ import com.example.funnycreaturesapp.ui.screens.Search
 @Composable
 fun FunnyCreaturesApp(
     navController: NavHostController = rememberNavController(),
-    ) {
+) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = FunnyCreaturesAppScreens.valueOf(
         backStackEntry?.destination?.route ?: FunnyCreaturesAppScreens.Home.name
     )
     val repository: List<DataSourceArticle> = DataSourceImpl.dataSourceArticles
-    val viewModel: FunnyCreaturesAppViewModel = viewModel(factory = FunnyCreaturesAppViewModel.funnyCreaturesAppViewModelFactory(repository))
+    val viewModel: FunnyCreaturesAppViewModel =
+        viewModel(factory = FunnyCreaturesAppViewModel.funnyCreaturesAppViewModelFactory(repository))
     val articles by viewModel.articles.collectAsState()
     val articlesInCart by viewModel.articlesInCart.collectAsState()
 
@@ -71,12 +73,15 @@ fun FunnyCreaturesApp(
         ) {
             composable(
                 route = FunnyCreaturesAppScreens.Home.name,
-                content = {
+                content = { backStackEntry ->
                     Home(
                         listOfArticles = articles,
                         onItemClicked = { articleId ->
                             viewModel.selectArticle(articleId)
                             navController.navigate(FunnyCreaturesAppScreens.Article.name)
+                        },
+                        onAdClicked = { articleInOffer ->
+                            navController.navigate(FunnyCreaturesAppScreens.Search.name)
                         }
                     )
                 }
