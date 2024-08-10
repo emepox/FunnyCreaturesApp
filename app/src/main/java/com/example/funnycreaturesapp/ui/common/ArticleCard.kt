@@ -29,7 +29,7 @@ import coil.compose.AsyncImage
 import coil.imageLoader
 import com.example.funnycreaturesapp.data.DataSourceImpl
 import com.example.funnycreaturesapp.data.mappers.DataSourceArticleToUiArticle
-import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
+import com.example.funnycreaturesapp.models.ArticleUI
 
 @Composable
 fun ArticleCard(

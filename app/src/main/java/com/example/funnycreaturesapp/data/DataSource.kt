@@ -1,27 +1,10 @@
 package com.example.funnycreaturesapp.data
 
-import com.example.funnycreaturesapp.data.DataSourceArticle.Category
+import com.example.funnycreaturesapp.models.DataSourceArticle
+import com.example.funnycreaturesapp.models.DataSourceArticle.*
 
 interface DataSource {
     val dataSourceArticles: List<DataSourceArticle>
-}
-
-data class DataSourceArticle(
-    val name: String,
-    val category: Category,
-    val price: Double,
-    val rating: Double,
-    val img: String,
-    val description: String = "Lorem Ipsum",
-    val isInOffer: Boolean = false,
-) {
-    enum class Category {
-        MONSTER, FOOD, PART, ACCESSORIES,
-    }
-
-    enum class Name {
-        DRAGONINO, HOMININO, AVININO, ENTRAÑAS, CASQUERÍA, JAULA,
-    }
 }
 
 object DataSourceImpl : DataSource {

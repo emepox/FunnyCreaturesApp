@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.funnycreaturesapp.data.DataSourceImpl
 import com.example.funnycreaturesapp.data.mappers.DataSourceArticleToUiArticle
-import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
+import com.example.funnycreaturesapp.models.ArticleUI
 
 @Composable
 fun Articles(

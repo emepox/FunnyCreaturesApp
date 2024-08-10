@@ -2,9 +2,9 @@ package com.example.funnycreaturesapp.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.funnycreaturesapp.data.DataSourceArticle
 import com.example.funnycreaturesapp.data.mappers.DataSourceArticleToUiArticle
-import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
+import com.example.funnycreaturesapp.models.ArticleUI
+import com.example.funnycreaturesapp.models.DataSourceArticle
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

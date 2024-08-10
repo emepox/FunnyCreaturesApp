@@ -2,7 +2,7 @@ package com.example.funnycreaturesapp.ui.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.funnycreaturesapp.data.DataSourceArticle.Category
+import com.example.funnycreaturesapp.models.ArticleUI
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -30,14 +30,4 @@ class ArticleViewModel(
     }
 }
 
-data class ArticleUI(
-    val id: String,
-    val name: String,
-    val category: Category,
-    val price: String,
-    val rating: String,
-    val description: String,
-    val img: String,
-    val isInOffer: Boolean,
-    val isFavourite: Boolean,
-)
+

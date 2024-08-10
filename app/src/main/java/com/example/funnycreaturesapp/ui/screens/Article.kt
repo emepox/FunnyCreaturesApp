@@ -48,7 +48,7 @@ import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.imageLoader
-import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
+import com.example.funnycreaturesapp.models.ArticleUI
 import com.example.funnycreaturesapp.ui.viewModels.ArticleViewModel
 
 @Composable

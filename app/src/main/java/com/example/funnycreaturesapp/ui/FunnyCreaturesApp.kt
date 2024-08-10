@@ -18,8 +18,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.funnycreaturesapp.R
-import com.example.funnycreaturesapp.data.DataSourceArticle
 import com.example.funnycreaturesapp.data.DataSourceImpl
+import com.example.funnycreaturesapp.models.DataSourceArticle
 import com.example.funnycreaturesapp.ui.common.NavBar
 import com.example.funnycreaturesapp.ui.common.TopBar
 import com.example.funnycreaturesapp.ui.screens.Article

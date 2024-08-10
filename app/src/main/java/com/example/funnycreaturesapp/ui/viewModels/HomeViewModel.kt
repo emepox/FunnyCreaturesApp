@@ -2,7 +2,8 @@ package com.example.funnycreaturesapp.ui.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.funnycreaturesapp.data.DataSourceArticle
+import com.example.funnycreaturesapp.models.ArticleUI
+import com.example.funnycreaturesapp.models.DataSourceArticle
 import com.example.funnycreaturesapp.utils.AdvertisementCreator.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

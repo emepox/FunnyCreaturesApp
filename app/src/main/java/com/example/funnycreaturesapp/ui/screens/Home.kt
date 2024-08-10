@@ -12,11 +12,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.funnycreaturesapp.data.DataSourceImpl
 import com.example.funnycreaturesapp.data.mappers.DataSourceArticleToUiArticle
+import com.example.funnycreaturesapp.models.ArticleUI
 import com.example.funnycreaturesapp.ui.common.Ad
 import com.example.funnycreaturesapp.ui.common.Articles
 import com.example.funnycreaturesapp.ui.common.Categories
 import com.example.funnycreaturesapp.ui.theme.FunnyCreaturesAppTheme
-import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
 import com.example.funnycreaturesapp.ui.viewModels.HomeViewModel
 
 @Composable

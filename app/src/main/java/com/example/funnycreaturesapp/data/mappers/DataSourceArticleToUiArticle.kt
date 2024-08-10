@@ -1,7 +1,7 @@
 package com.example.funnycreaturesapp.data.mappers
 
-import com.example.funnycreaturesapp.data.DataSourceArticle
-import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
+import com.example.funnycreaturesapp.models.ArticleUI
+import com.example.funnycreaturesapp.models.DataSourceArticle
 import com.example.funnycreaturesapp.utils.RemoteImageUploader.uploadRemoteImage
 import java.util.UUID
 
@@ -17,7 +17,6 @@ object DataSourceArticleToUiArticle {
             description = dataSourceArticle.description,
             img = uploadRemoteImage(dataSourceArticle.img),
             isInOffer = false,
-            isFavourite = false,
         )
     }
 
