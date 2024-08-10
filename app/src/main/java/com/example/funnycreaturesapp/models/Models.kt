@@ -30,3 +30,11 @@ data class ArticleUI(
     val img: String,
     val isInOffer: Boolean,
 )
+
+data class ArticleInCartModel(
+    val id: String,
+    val name: String,
+    val price: String,
+    val category: Category,
+    val img: String,
+)

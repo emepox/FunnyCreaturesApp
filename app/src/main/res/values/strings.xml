@@ -5,6 +5,7 @@
     <string name="favourites">Favourites</string>
     <string name="profile">Profile</string>
     <string name="article">Article</string>
+    <string name="cart">Cart</string>
     <string name="back_button">Back Button</string>
 
 </resources>

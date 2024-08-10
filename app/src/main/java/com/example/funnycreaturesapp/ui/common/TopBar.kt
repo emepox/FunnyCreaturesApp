@@ -1,6 +1,7 @@
 package com.example.funnycreaturesapp.ui.common
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,6 +39,7 @@ fun TopBar(
     canNavigateBack: Boolean,
     navigateUp: () -> Unit,
     articlesInCart: Int,
+    onCartClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column() {
@@ -84,7 +86,11 @@ fun TopBar(
                         Icon(
                             imageVector = Icons.Filled.ShoppingCart,
                             contentDescription = "Items in cart",
-                            modifier = Modifier.size(30.dp)
+                            modifier = Modifier
+                                .size(30.dp)
+                                .clickable {
+                                    onCartClicked()
+                                }
                         )
                     }
                 )

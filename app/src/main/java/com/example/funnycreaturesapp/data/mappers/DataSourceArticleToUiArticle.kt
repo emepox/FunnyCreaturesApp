@@ -20,8 +20,7 @@ object DataSourceArticleToUiArticle {
         )
     }
 
-    fun mapToUiModelList(dataSourceArticle: List<DataSourceArticle>): List<ArticleUI> {
-        return dataSourceArticle.map { mapToUiModel(it) }
-    }
+    fun mapToUiModelList(dataSourceArticle: List<DataSourceArticle>): List<ArticleUI> =
+        dataSourceArticle.map { mapToUiModel(it) }
 
 }

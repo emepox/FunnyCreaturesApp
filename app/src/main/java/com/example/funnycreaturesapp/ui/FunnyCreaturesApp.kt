@@ -23,6 +23,7 @@ import com.example.funnycreaturesapp.models.DataSourceArticle
 import com.example.funnycreaturesapp.ui.common.NavBar
 import com.example.funnycreaturesapp.ui.common.TopBar
 import com.example.funnycreaturesapp.ui.screens.Article
+import com.example.funnycreaturesapp.ui.screens.Cart
 import com.example.funnycreaturesapp.ui.screens.Favourites
 import com.example.funnycreaturesapp.ui.screens.Home
 import com.example.funnycreaturesapp.ui.screens.Profile
@@ -50,6 +51,9 @@ fun FunnyCreaturesApp(
                 canNavigateBack = true,
                 navigateUp = { navController.navigateUp() },
                 articlesInCart = articlesInCart.size,
+                onCartClicked = {
+                    navController.navigate(FunnyCreaturesAppScreens.Cart.name)
+                },
                 modifier = Modifier
                     .fillMaxWidth()
             )
@@ -129,12 +133,18 @@ fun FunnyCreaturesApp(
                                 viewModel.addToCart(addedArticle, amount)
                             },
                             isFavourite = (favouriteArticles.contains(selectedArticle)),
-                            onFavouriteClicked = {article ->
-                                                 viewModel.onClickedFavourite(article)
+                            onFavouriteClicked = {favouritedArticle ->
+                                                 viewModel.onClickedFavourite(favouritedArticle)
                             },
                         )
                     }
                 }
+            )
+            composable(
+                route = FunnyCreaturesAppScreens.Cart.name,
+                content = { Cart(
+                    listOfArticlesInCart = articlesInCart
+                ) }
             )
         }
     }
@@ -146,4 +156,5 @@ enum class FunnyCreaturesAppScreens(@StringRes val title: Int) {
     Favourites(title = R.string.favourites),
     Profile(title = R.string.profile),
     Article(title = R.string.article),
+    Cart(title = R.string.cart)
 }

@@ -2,7 +2,10 @@ package com.example.funnycreaturesapp.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.funnycreaturesapp.data.DataSamples
+import com.example.funnycreaturesapp.data.mappers.ArticleUIToArticleInCart
 import com.example.funnycreaturesapp.data.mappers.DataSourceArticleToUiArticle
+import com.example.funnycreaturesapp.models.ArticleInCartModel
 import com.example.funnycreaturesapp.models.ArticleUI
 import com.example.funnycreaturesapp.models.DataSourceArticle
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,8 +17,8 @@ class FunnyCreaturesAppViewModel(repository: List<DataSourceArticle>) : ViewMode
     private var _articles = MutableStateFlow<List<ArticleUI>>(emptyList())
     val articles: StateFlow<List<ArticleUI>> = _articles.asStateFlow()
 
-    private var _articlesInCart = MutableStateFlow<List<ArticleUI>>(emptyList())
-    val articlesInCart: StateFlow<List<ArticleUI>> = _articlesInCart.asStateFlow()
+    private var _articlesInCart = MutableStateFlow<List<ArticleInCartModel>>(emptyList())
+    val articlesInCart: StateFlow<List<ArticleInCartModel>> = _articlesInCart.asStateFlow()
 
     private var _selectedArticle = MutableStateFlow<ArticleUI?>(null)
     val selectedArticle: StateFlow<ArticleUI?> = _selectedArticle.asStateFlow()
@@ -26,11 +29,13 @@ class FunnyCreaturesAppViewModel(repository: List<DataSourceArticle>) : ViewMode
     init {
         // Call the articles repository. Assign it to the _articles variable.
         _articles.value = DataSourceArticleToUiArticle.mapToUiModelList(repository)
+        _articlesInCart.value = DataSamples.sampleOfCartArticles
     }
 
     fun addToCart(articleUI: ArticleUI, amount: Int) {
+        val mappedArticle = ArticleUIToArticleInCart.articleUIToArticleInCart(articleUI)
         repeat(amount) {
-            _articlesInCart.value += articleUI
+            _articlesInCart.value += mappedArticle
         }
     }
 
