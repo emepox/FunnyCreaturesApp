@@ -132,35 +132,3 @@ object DataSourceImpl : DataSource {
         ),
     )
 }
-
-val listOfUrlImages = listOf(
-    "dragonino_0",
-    "dragonino_1",
-    "dragonino_2",
-    "dragonino_3",
-    "dragonino_4",
-    "dragonino_5",
-    "dragonino_6",
-    "dragonino_7",
-    "dragonino_8",
-    "dragonino_9",
-    "alimaña_0",
-    "alimaña_1",
-    "acuanino_0",
-    "avinino_0",
-    "avinino_1",
-    "avinino_2",
-    "avinino_3",
-    "hominino_0",
-    "hominino_1",
-    "jaula_0",
-    "jaula_1",
-    "jaula_2",
-    "entrañas_0",
-    "entrañas_1",
-
-    )
-
-val listOfAds = listOf(
-    "ad_casquería_0",
-)
