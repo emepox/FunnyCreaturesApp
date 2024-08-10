@@ -30,9 +30,7 @@ class HomeViewModel(listOfArticles: List<ArticleUI>) : ViewModel() {
 
     private fun displayAdvertisement(): Advertisement? {
         val randomBoolean = Random.nextBoolean()
-        return if (randomBoolean) {
-            RandomAdvertisementCreator.advertisement
-        } else null
+        return if (randomBoolean) RandomAdvertisementCreator.advertisement else null
     }
 
     companion object {

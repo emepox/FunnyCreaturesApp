@@ -17,7 +17,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.data.DataSourceArticle
 import com.example.funnycreaturesapp.data.DataSourceImpl
@@ -42,6 +41,7 @@ fun FunnyCreaturesApp(
         viewModel(factory = FunnyCreaturesAppViewModel.funnyCreaturesAppViewModelFactory(repository))
     val articles by viewModel.articles.collectAsState()
     val articlesInCart by viewModel.articlesInCart.collectAsState()
+    val favouriteArticles by viewModel.favouriteArticles.collectAsState()
 
     Scaffold(
         topBar = {
@@ -82,7 +82,11 @@ fun FunnyCreaturesApp(
                         },
                         onAdClicked = { articleInOffer ->
                             navController.navigate(FunnyCreaturesAppScreens.Search.name)
-                        }
+                        },
+                        onFavouriteClicked = {article ->
+                            viewModel.onClickedFavourite(article)
+                        },
+                        favouriteArticles = favouriteArticles,
                     )
                 }
             )
@@ -91,7 +95,10 @@ fun FunnyCreaturesApp(
                 content = {
                     Search(
                         listOfArticles = articles,
-                        onItemClicked = { navController.navigate(FunnyCreaturesAppScreens.Article.name) }
+                        onItemClicked = { navController.navigate(FunnyCreaturesAppScreens.Article.name) },
+                        onFavouriteClicked = { article ->
+                            viewModel.onClickedFavourite(article)},
+                        favouritesList = favouriteArticles,
                     )
                 }
             )
@@ -99,10 +106,11 @@ fun FunnyCreaturesApp(
                 route = FunnyCreaturesAppScreens.Favourites.name,
                 content = {
                     Favourites(
-                        favouriteArticles = articles.filter {
-                            it.isFavourite
-                        },
-                        onItemClicked = { navController.navigate(FunnyCreaturesAppScreens.Article.name) }
+                        favouriteArticles = favouriteArticles,
+                        onItemClicked = { navController.navigate(FunnyCreaturesAppScreens.Article.name) },
+                        onFavouriteClicked = {article ->
+                            viewModel.onClickedFavourite(article)
+                        }
                     )
                 }
             )
@@ -119,7 +127,11 @@ fun FunnyCreaturesApp(
                             selectedArticle = article,
                             onAddClicked = { addedArticle, amount ->
                                 viewModel.addToCart(addedArticle, amount)
-                            }
+                            },
+                            isFavourite = (favouriteArticles.contains(selectedArticle)),
+                            onFavouriteClicked = {article ->
+                                                 viewModel.onClickedFavourite(article)
+                            },
                         )
                     }
                 }

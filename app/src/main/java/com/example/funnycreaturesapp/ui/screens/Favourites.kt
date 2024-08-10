@@ -9,7 +9,13 @@ import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
 fun Favourites(
     favouriteArticles: List<ArticleUI>,
     onItemClicked: () -> Unit,
+    onFavouriteClicked: (ArticleUI) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Articles(articles = favouriteArticles, onItemClicked = { onItemClicked() })
+    Articles(
+        articles = favouriteArticles,
+        onItemClicked = { onItemClicked() },
+        favouriteArticles = favouriteArticles,
+        onFavouriteClicked = onFavouriteClicked,
+    )
 }

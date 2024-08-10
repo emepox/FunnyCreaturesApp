@@ -1,6 +1,5 @@
 package com.example.funnycreaturesapp.ui.common
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,15 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.imageLoader
-import com.example.funnycreaturesapp.R
-import com.example.funnycreaturesapp.ui.viewModels.HomeViewModel
-import com.example.funnycreaturesapp.utils.AdvertisementCreator
 import com.example.funnycreaturesapp.utils.AdvertisementCreator.*
 
 @Composable

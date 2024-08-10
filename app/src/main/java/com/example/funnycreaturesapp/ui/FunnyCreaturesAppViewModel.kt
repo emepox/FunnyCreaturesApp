@@ -20,6 +20,9 @@ class FunnyCreaturesAppViewModel(repository: List<DataSourceArticle>) : ViewMode
     private var _selectedArticle = MutableStateFlow<ArticleUI?>(null)
     val selectedArticle: StateFlow<ArticleUI?> = _selectedArticle.asStateFlow()
 
+    private var _favouriteArticles = MutableStateFlow<List<ArticleUI>>(emptyList())
+    val favouriteArticles = _favouriteArticles.asStateFlow()
+
     init {
         // Call the articles repository. Assign it to the _articles variable.
         _articles.value = DataSourceArticleToUiArticle.mapToUiModelList(repository)
@@ -33,6 +36,23 @@ class FunnyCreaturesAppViewModel(repository: List<DataSourceArticle>) : ViewMode
 
     fun selectArticle(articleId: String) {
         _selectedArticle.value = _articles.value.find { it.id == articleId }
+    }
+
+    fun onClickedFavourite(article: ArticleUI) {
+
+            if (favouriteArticles.value.contains(article)) {
+                removeFromFavourites(article)
+            } else {
+                addToFavourites(article)
+            }
+    }
+
+    private fun addToFavourites(article: ArticleUI) {
+        _favouriteArticles.value += article
+    }
+
+    private fun removeFromFavourites(article: ArticleUI) {
+        _favouriteArticles.value -= article
     }
 
     companion object {

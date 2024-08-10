@@ -1,21 +1,22 @@
 package com.example.funnycreaturesapp.ui.common
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.ui.FunnyCreaturesAppScreens
 
 @Composable
@@ -29,50 +30,41 @@ fun NavBar(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier.fillMaxWidth()
     ) {
-        Image(
-            painter = painterResource(
-                id = R.drawable.baseline_home
-            ),
+        Icon(
+            imageVector = Icons.Filled.Home,
             contentDescription = "Home",
             modifier = modifier
                 .size(30.dp)
                 .clickable {
-                navController.navigate(FunnyCreaturesAppScreens.Home.name)
-            }
+                    navController.navigate(FunnyCreaturesAppScreens.Home.name)
+                }
         )
-        Image(
-            painter = painterResource(
-                id = R.drawable.baseline_manage_search
-            ),
+        Icon(
+            imageVector = Icons.Filled.Search,
             contentDescription = "Search",
             modifier = modifier
                 .size(30.dp)
                 .clickable {
-                navController.navigate(FunnyCreaturesAppScreens.Search.name)
-            }
+                    navController.navigate(FunnyCreaturesAppScreens.Search.name)
+                }
         )
-        Image(
-            painter = painterResource(
-                id = R.drawable.baseline_favorite
-            ),
+        Icon(
+            imageVector = Icons.Filled.Favorite,
             contentDescription = "Favourites",
             modifier = modifier
                 .size(30.dp)
                 .clickable {
-                navController.navigate(FunnyCreaturesAppScreens.Favourites.name)
-            }
+                    navController.navigate(FunnyCreaturesAppScreens.Favourites.name)
+                }
         )
-        Image(
-            painter = painterResource(
-                id = R.drawable.baseline_profile_circle
-            ),
+        Icon(
+            imageVector = Icons.Filled.AccountCircle,
             contentDescription = "Profile",
             modifier = modifier
                 .size(30.dp)
                 .clickable {
-                navController.navigate(FunnyCreaturesAppScreens.Profile.name)
-            }
+                    navController.navigate(FunnyCreaturesAppScreens.Profile.name)
+                }
         )
     }
-
 }

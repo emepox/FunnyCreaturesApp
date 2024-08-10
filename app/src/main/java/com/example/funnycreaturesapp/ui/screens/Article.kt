@@ -1,9 +1,9 @@
 package com.example.funnycreaturesapp.ui.screens
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,12 +16,17 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -35,7 +40,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -44,7 +48,6 @@ import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.imageLoader
-import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
 import com.example.funnycreaturesapp.ui.viewModels.ArticleViewModel
 
@@ -52,6 +55,8 @@ import com.example.funnycreaturesapp.ui.viewModels.ArticleViewModel
 fun Article(
     selectedArticle: ArticleUI,
     onAddClicked: (ArticleUI, Int) -> Unit,
+    isFavourite: Boolean,
+    onFavouriteClicked: (ArticleUI) -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
@@ -62,7 +67,7 @@ fun Article(
 
     Scaffold(
         bottomBar = {
-            Divider()
+            HorizontalDivider()
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly,
@@ -131,12 +136,14 @@ fun Article(
                     contentDescription = selectedArticle.name,
                     imageLoader = LocalContext.current.imageLoader,
                     )
-                Image(
-                    painter = painterResource(
-                        id = if (selectedArticle.isFavourite) R.drawable.baseline_favorite else R.drawable.baseline_favorite_empty
-                    ),
+                Icon(
+                    imageVector = if (isFavourite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                     contentDescription = "Is favourite",
-                    modifier = Modifier.padding(10.dp),
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .clickable {
+                            onFavouriteClicked(selectedArticle)
+                        }
                 )
             }
             Row(
@@ -171,9 +178,9 @@ fun Article(
                         Text(text = state.rating)
                     },
                     leadingIcon = {
-                        Image(
-                            painter = painterResource(id = R.drawable.baseline_grade),
-                            contentDescription = "Rating"
+                        Icon(
+                            imageVector = Icons.Filled.Star,
+                            contentDescription = "Rating",
                         )
                     },
                 )

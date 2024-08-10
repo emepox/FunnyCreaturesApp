@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.funnycreaturesapp.data.DataSourceImpl
@@ -18,6 +17,8 @@ import com.example.funnycreaturesapp.ui.viewModels.ArticleUI
 fun Articles(
     articles: List<ArticleUI>,
     onItemClicked: (String) -> Unit,
+    favouriteArticles: List<ArticleUI>,
+    onFavouriteClicked: (ArticleUI) -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
@@ -37,7 +38,13 @@ fun Articles(
                 item = articles[itemIndex],
                 onItemClicked = {
                     onItemClicked(articles[itemIndex].id)
-                })
+                },
+                isFavourite = favouriteArticles.contains(articles[itemIndex]),
+                onFavouriteClicked = {
+                    onFavouriteClicked(it)
+                }
+
+            )
         }
     }
 }
@@ -47,7 +54,10 @@ fun Articles(
 fun ArticlesPreview() {
     Articles(
         articles = DataSourceArticleToUiArticle.mapToUiModelList(DataSourceImpl.dataSourceArticles),
-        onItemClicked = {})
+        onItemClicked = {},
+        favouriteArticles = DataSourceArticleToUiArticle.mapToUiModelList(DataSourceImpl.dataSourceArticles),
+        onFavouriteClicked = {}
+    )
 }
 
 

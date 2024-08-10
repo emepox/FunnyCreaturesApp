@@ -21,6 +21,8 @@ import com.example.funnycreaturesapp.ui.viewModels.SearchViewModel
 fun Search(
     listOfArticles: List<ArticleUI>,
     onItemClicked: () -> Unit,
+    onFavouriteClicked: (ArticleUI) -> Unit,
+    favouritesList: List<ArticleUI>,
     modifier: Modifier = Modifier,
 ) {
     val viewModel: SearchViewModel =
@@ -40,15 +42,17 @@ fun Search(
                 expanded = true,
                 onExpandedChange = { expanded = it },
                 onSearch = { viewModel.filterArticlesByQuery(query) },
-                placeholder = { Text(text = "Search") },
+                placeholder = { Text(text = "Type here") },
             )
         },
         expanded = true,
-        onExpandedChange = { expanded = it}
+        onExpandedChange = { expanded = it},
     ) {
         Articles(
             articles = viewModel.filterArticlesWhileTyping(query),
-            onItemClicked = { onItemClicked() }
+            onItemClicked = { onItemClicked() },
+            onFavouriteClicked = onFavouriteClicked,
+            favouriteArticles = favouritesList,
         )
     }
 }

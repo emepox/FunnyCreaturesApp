@@ -24,6 +24,8 @@ fun Home(
     listOfArticles: List<ArticleUI>,
     onItemClicked: (String) -> Unit,
     onAdClicked: (String) -> Unit,
+    onFavouriteClicked: (ArticleUI) -> Unit,
+    favouriteArticles: List<ArticleUI>,
     modifier: Modifier = Modifier
 ) {
 
@@ -55,7 +57,11 @@ fun Home(
             articles = articles,
             onItemClicked = { articleId ->
                 onItemClicked(articleId)
-            }
+            },
+            onFavouriteClicked = {article ->
+                onFavouriteClicked(article)
+            },
+            favouriteArticles = favouriteArticles,
         )
     }
 }
@@ -67,7 +73,9 @@ fun GreetingPreview() {
         Home(
             DataSourceArticleToUiArticle.mapToUiModelList(
                 DataSourceImpl.dataSourceArticles),
-            {},{}
+            {},{}, {},
+            favouriteArticles = DataSourceArticleToUiArticle.mapToUiModelList(
+                DataSourceImpl.dataSourceArticles)
         )
     }
 }
