@@ -3,7 +3,7 @@ package com.example.funnycreaturesapp.ui.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.funnycreaturesapp.models.ArticleUI
-import com.example.funnycreaturesapp.models.DataSourceArticle
+import com.example.funnycreaturesapp.models.Category
 import com.example.funnycreaturesapp.utils.AdvertisementCreator.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,7 +19,7 @@ class HomeViewModel(listOfArticles: List<ArticleUI>) : ViewModel() {
 
     val advertisement = displayAdvertisement()
 
-    fun filteredArticlesByCategory(category: DataSourceArticle.Category) {
+    fun filteredArticlesByCategory(category: Category) {
         _articles.value = initialListOfArticles.filter {
             it.category == category
         }

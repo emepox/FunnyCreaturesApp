@@ -10,15 +10,7 @@ data class DataSourceArticle(
     val img: String,
     val description: String = "Lorem Ipsum",
     val isInOffer: Boolean = false,
-) {
-    enum class Category {
-        MONSTER, FOOD, PART, ACCESSORIES,
-    }
-
-    enum class Name {
-        DRAGONINO, HOMININO, AVININO, ENTRAÑAS, CASQUERÍA, JAULA,
-    }
-}
+)
 
 data class ArticleUI(
     val id: String,
@@ -39,3 +31,11 @@ data class ArticleInCartModel(
     val img: String,
     val amount: Int,
 )
+
+enum class Category {
+    MONSTER, FOOD, PART, ACCESSORIES,
+}
+
+enum class Name {
+    DRAGONINO, HOMININO, AVININO, ENTRAÑAS, CASQUERÍA, JAULA,
+}

@@ -2,13 +2,15 @@ package com.example.funnycreaturesapp.data
 
 import com.example.funnycreaturesapp.models.ArticleInCartModel
 import com.example.funnycreaturesapp.models.ArticleUI
+import com.example.funnycreaturesapp.models.Category
+import com.example.funnycreaturesapp.models.Category.*
 import com.example.funnycreaturesapp.models.DataSourceArticle
 
 object DataSamples {
     val sampleOfDataSourceArticles = listOf(
         DataSourceArticle(
             name = "Alimaña",
-            category = DataSourceArticle.Category.FOOD,
+            category = FOOD,
             price = 200.00,
             rating = 4.5,
             img = "alimaña",
@@ -16,14 +18,14 @@ object DataSamples {
         ),
         DataSourceArticle(
             name = "Dragonino",
-            category = DataSourceArticle.Category.PART,
+            category = PART,
             price = 200.00,
             rating = 4.8,
             img = "dragonino",
         ),
         DataSourceArticle(
             name = "Hominino",
-            category = DataSourceArticle.Category.MONSTER,
+            category = MONSTER,
             price = 200.00,
             rating = 3.5,
             img = "hominino",
@@ -34,7 +36,7 @@ object DataSamples {
         ArticleUI(
             id = "123",
             name = "Hominino",
-            category = DataSourceArticle.Category.MONSTER,
+            category = MONSTER,
             price = "200.00",
             rating = "3.5",
             img = "hominino",
@@ -44,7 +46,7 @@ object DataSamples {
         ArticleUI(
             id = "234",
             name = "Draconino",
-            category = DataSourceArticle.Category.MONSTER,
+            category = MONSTER,
             price = "200.00",
             rating = "3.5",
             img = "dragonino",
@@ -54,7 +56,7 @@ object DataSamples {
         ArticleUI(
             id = "123",
             name = "Hominino",
-            category = DataSourceArticle.Category.MONSTER,
+            category = MONSTER,
             price = "200.00",
             rating = "3.5",
             img = "hominino",
@@ -68,14 +70,14 @@ object DataSamples {
             id = "123",
             name = "Hominino",
             price = "200.00",
-            category = DataSourceArticle.Category.MONSTER,
+            category = MONSTER,
             img = "hominino",
             amount = 2,
         ),
         ArticleInCartModel(
             id = "234",
             name = "Draconino",
-            category = DataSourceArticle.Category.MONSTER,
+            category = MONSTER,
             price = "200.00",
             img = "draconino",
             amount = 1,
