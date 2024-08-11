@@ -32,7 +32,7 @@ object DataSamples {
 
     val sampleOfUIArticles = listOf(
         ArticleUI(
-            id = "",
+            id = "123",
             name = "Hominino",
             category = DataSourceArticle.Category.MONSTER,
             price = "200.00",
@@ -42,7 +42,7 @@ object DataSamples {
             isInOffer = false,
         ),
         ArticleUI(
-            id = "",
+            id = "234",
             name = "Draconino",
             category = DataSourceArticle.Category.MONSTER,
             price = "200.00",
@@ -52,12 +52,12 @@ object DataSamples {
             isInOffer = false,
         ),
         ArticleUI(
-            id = "",
-            name = "Acuanino",
+            id = "123",
+            name = "Hominino",
             category = DataSourceArticle.Category.MONSTER,
             price = "200.00",
             rating = "3.5",
-            img = "acuanino",
+            img = "hominino",
             description = "Lorem Ipsum dolor",
             isInOffer = false,
         )
@@ -65,40 +65,21 @@ object DataSamples {
 
     val sampleOfCartArticles = listOf(
         ArticleInCartModel(
-            id = "",
-            name = "Draconino",
-            price = "200",
+            id = "123",
+            name = "Hominino",
+            price = "200.00",
             category = DataSourceArticle.Category.MONSTER,
-            img = "dragonino"
+            img = "hominino",
+            amount = 2,
         ),
         ArticleInCartModel(
-            id = "",
-            name = "Jaula",
-            price = "200",
-            category = DataSourceArticle.Category.ACCESSORIES,
-            img = "jaula"
+            id = "234",
+            name = "Draconino",
+            category = DataSourceArticle.Category.MONSTER,
+            price = "200.00",
+            img = "draconino",
+            amount = 1,
         ),
-        ArticleInCartModel(
-            id = "",
-            name = "Casquería",
-            price = "200",
-            category = DataSourceArticle.Category.FOOD,
-            img = "entrañas"
-        ),
-        ArticleInCartModel(
-            id = "",
-            name = "Casquería",
-            price = "200",
-            category = DataSourceArticle.Category.FOOD,
-            img = "entrañas"
-        ),
-        ArticleInCartModel(
-            id = "",
-            name = "Casquería",
-            price = "200",
-            category = DataSourceArticle.Category.FOOD,
-            img = "entrañas"
-        )
     )
 
 }

@@ -2,9 +2,8 @@ package com.example.funnycreaturesapp.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.funnycreaturesapp.data.DataSamples
-import com.example.funnycreaturesapp.data.mappers.ArticleUIToArticleInCart
 import com.example.funnycreaturesapp.data.mappers.DataSourceArticleToUiArticle
+import com.example.funnycreaturesapp.data.mappers.ListOfArticlesToCartModel
 import com.example.funnycreaturesapp.models.ArticleInCartModel
 import com.example.funnycreaturesapp.models.ArticleUI
 import com.example.funnycreaturesapp.models.DataSourceArticle
@@ -26,30 +25,92 @@ class FunnyCreaturesAppViewModel(repository: List<DataSourceArticle>) : ViewMode
     private var _favouriteArticles = MutableStateFlow<List<ArticleUI>>(emptyList())
     val favouriteArticles = _favouriteArticles.asStateFlow()
 
+    private var _cartArticlesAmount = MutableStateFlow(0)
+    val cartArticlesAmount = _cartArticlesAmount.asStateFlow()
+
     init {
         // Call the articles repository. Assign it to the _articles variable.
         _articles.value = DataSourceArticleToUiArticle.mapToUiModelList(repository)
-        _articlesInCart.value = DataSamples.sampleOfCartArticles
     }
 
-    fun addToCart(articleUI: ArticleUI, amount: Int) {
-        val mappedArticle = ArticleUIToArticleInCart.articleUIToArticleInCart(articleUI)
-        repeat(amount) {
-            _articlesInCart.value += mappedArticle
-        }
-    }
 
+    // Home screen
     fun selectArticle(articleId: String) {
         _selectedArticle.value = _articles.value.find { it.id == articleId }
     }
 
+    // Cart
+
+    fun addArticleToCart(article: ArticleUI, amount: Int = 1) {
+        val cartArticleModel = ListOfArticlesToCartModel.articleToCartArticle(article)
+        // Check if element if in the list
+        if (checkIfArticleIsInCart(cartArticleModel.id)) {
+            // If it is, increase amount
+            val updatedArticles = _articlesInCart.value.map {
+                if (it.id == cartArticleModel.id) {
+                    it.copy(amount = it.amount.plus(amount))
+                } else it
+            }
+            _articlesInCart.value = updatedArticles
+        } else {
+            // If it isn't, add article to list
+            _articlesInCart.value += cartArticleModel
+        }
+        checkCartArticlesAmount()
+    }
+
+    fun increaseArticle(article: ArticleInCartModel) {
+        val updatedArticles = _articlesInCart.value.map {
+            if (it.id == article.id) {
+                it.copy(amount = it.amount.plus(1))
+            }
+            else {
+                it
+            }
+        }
+        _articlesInCart.value = updatedArticles
+        checkCartArticlesAmount()
+    }
+
+    fun reduceArticle(article: ArticleInCartModel) {
+        val updatedArticles = _articlesInCart.value.map {
+            if (it.id == article.id) {
+                it.copy(amount = it.amount.decreaseSafely())
+            }
+            else {
+                it
+            }
+        }
+        _articlesInCart.value = updatedArticles
+        checkCartArticlesAmount()
+    }
+
+    private fun Int.decreaseSafely(): Int {
+        return if (this > 1) this - 1 else this
+    }
+
+    fun removeArticle(article: ArticleInCartModel) {
+        _articlesInCart.value -= article
+        checkCartArticlesAmount()
+    }
+
+    private fun checkIfArticleIsInCart(id: String): Boolean =
+        _articlesInCart.value.any { it.id == id}
+
+    private fun checkCartArticlesAmount() {
+        val total = _articlesInCart.value.sumOf { it.amount }
+        _cartArticlesAmount.value = total
+    }
+
+
+    // Favourites
     fun onClickedFavourite(article: ArticleUI) {
 
-            if (favouriteArticles.value.contains(article)) {
-                removeFromFavourites(article)
-            } else {
-                addToFavourites(article)
-            }
+        if (favouriteArticles.value.contains(article)) {
+            removeFromFavourites(article)
+        } else {
+            addToFavourites(article)
+        }
     }
 
     private fun addToFavourites(article: ArticleUI) {

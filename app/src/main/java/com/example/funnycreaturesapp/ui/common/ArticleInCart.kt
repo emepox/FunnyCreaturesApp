@@ -30,7 +30,12 @@ import com.example.funnycreaturesapp.models.ArticleInCartModel
 import com.example.funnycreaturesapp.utils.RemoteImageUploader
 
 @Composable
-fun ArticleInCart(article: ArticleInCartModel) {
+fun ArticleInCart(
+    article: ArticleInCartModel,
+    onRemoveArticleClicked: (ArticleInCartModel) -> Unit,
+    onIncreaseAmountClicked: (ArticleInCartModel) -> Unit,
+    onDecreaseAmountClicked: (ArticleInCartModel) -> Unit,
+) {
 
     Row(
         horizontalArrangement = Arrangement.Start,
@@ -38,8 +43,7 @@ fun ArticleInCart(article: ArticleInCartModel) {
         modifier = Modifier
             .fillMaxWidth()
             .height(130.dp)
-            .padding(vertical = 10.dp)
-        ,
+            .padding(vertical = 10.dp),
     ) {
         AsyncImage(
             model = RemoteImageUploader.uploadRemoteImage(article.img),
@@ -48,12 +52,17 @@ fun ArticleInCart(article: ArticleInCartModel) {
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(start = 20.dp).fillMaxSize()
+            modifier = Modifier
+                .padding(start = 20.dp)
+                .fillMaxSize()
         ) {
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Top,
-                modifier = Modifier.fillMaxWidth().weight(1f).padding(vertical = 10.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .padding(vertical = 10.dp)
             ) {
                 Column {
                     Text(
@@ -73,21 +82,27 @@ fun ArticleInCart(article: ArticleInCartModel) {
                     contentDescription = "Remove article",
                     modifier = Modifier
                         .clickable {
-
-                    }
+                            onRemoveArticleClicked(article)
+                        }
                 )
             }
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Bottom,
-                modifier = Modifier.fillMaxWidth().weight(0.5f)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(0.5f)
             ) {
                 Text(
-                    text = article.price+"€",
+                    text = article.price + "€",
                     fontSize = 20.sp,
 
+                    )
+                CartCounter(
+                    onIncreaseAmountClicked = { onIncreaseAmountClicked(article) },
+                    onDecreaseAmountClicked = { onDecreaseAmountClicked(article) },
+                    article.amount,
                 )
-                CartCounter()
             }
         }
     }
@@ -95,7 +110,11 @@ fun ArticleInCart(article: ArticleInCartModel) {
 }
 
 @Composable
-fun CartCounter() {
+fun CartCounter(
+    onIncreaseAmountClicked: () -> Unit,
+    onDecreaseAmountClicked: () -> Unit,
+    amount: Int,
+) {
     Row {
         Icon(
             imageVector = Icons.Filled.KeyboardArrowDown,
@@ -103,11 +122,11 @@ fun CartCounter() {
             modifier = Modifier
                 .border(1.dp, color = Color.Gray)
                 .clickable {
-
-            }
+                    onDecreaseAmountClicked()
+                }
         )
         Text(
-            text = "0",
+            text = amount.toString(),
             modifier = Modifier.padding(horizontal = 10.dp)
         )
         Icon(
@@ -116,8 +135,8 @@ fun CartCounter() {
             modifier = Modifier
                 .border(1.dp, color = Color.Gray)
                 .clickable {
-
-            }
+                    onIncreaseAmountClicked()
+                }
         )
     }
 }
@@ -126,6 +145,9 @@ fun CartCounter() {
 @Composable
 fun ArticleInCartPreview() {
     ArticleInCart(
-        article = DataSamples.sampleOfCartArticles[0]
+        article = DataSamples.sampleOfCartArticles[0],
+        onRemoveArticleClicked = {},
+        onDecreaseAmountClicked = {},
+        onIncreaseAmountClicked = {},
     )
 }

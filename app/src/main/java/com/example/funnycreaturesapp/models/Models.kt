@@ -37,4 +37,5 @@ data class ArticleInCartModel(
     val price: String,
     val category: Category,
     val img: String,
+    val amount: Int,
 )

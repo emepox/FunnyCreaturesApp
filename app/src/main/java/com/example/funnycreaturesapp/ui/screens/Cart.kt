@@ -20,17 +20,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.funnycreaturesapp.models.ArticleInCartModel
 import com.example.funnycreaturesapp.ui.common.ArticleInCart
-import com.example.funnycreaturesapp.ui.viewModels.CartViewModel
 
 @Composable
 fun Cart(
-    listOfArticlesInCart: List<ArticleInCartModel>
+    listOfArticlesInCart: List<ArticleInCartModel>,
+    onIncreaseUnitClicked: (ArticleInCartModel) -> Unit,
+    onDecreaseUnitClicked: (ArticleInCartModel) -> Unit,
+    onRemoveArticleClicked: (ArticleInCartModel) -> Unit,
 ) {
-    val viewModel: CartViewModel =
-        viewModel(factory = CartViewModel.cartViewModelFactory(listOfArticlesInCart))
+
+
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -44,7 +45,17 @@ fun Cart(
             items(
                 count = listOfArticlesInCart.size,
                 itemContent = { index ->
-                    ArticleInCart(article = viewModel.listOfArticlesInCart[index])
+                    ArticleInCart(
+                        article = listOfArticlesInCart[index],
+                        onIncreaseAmountClicked = { article ->
+                            onIncreaseUnitClicked(article)},
+                        onDecreaseAmountClicked = { article ->
+                            onDecreaseUnitClicked(article)},
+                        onRemoveArticleClicked = {article ->
+                            onRemoveArticleClicked(article)
+
+                        }
+                    )
                     if (listOfArticlesInCart[index] != listOfArticlesInCart[0]) {
                         HorizontalDivider()
                     }
@@ -56,7 +67,8 @@ fun Cart(
                 .align(Alignment.BottomCenter)
                 .background(
                     color = Color.LightGray,
-                    shape = RoundedCornerShape(topStartPercent = 10, topEndPercent = 10))
+                    shape = RoundedCornerShape(topStartPercent = 10, topEndPercent = 10)
+                )
                 .fillMaxWidth()
                 .padding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 5.dp)
         ) {
@@ -106,7 +118,9 @@ fun Totals() {
     }
 
     Button(
-        modifier = Modifier.fillMaxWidth().padding(top = 5.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 5.dp),
         onClick = { /*TODO*/ }
     ) {
         Text(text = "Checkout for 2.000€")

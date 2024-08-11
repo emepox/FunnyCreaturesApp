@@ -2,16 +2,14 @@ package com.example.funnycreaturesapp.ui.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.funnycreaturesapp.models.ArticleInCartModel
+import com.example.funnycreaturesapp.models.ArticleUI
 
 class CartViewModel(
-    val listOfArticlesInCart: List<ArticleInCartModel>
+    listOfArticlesInCart: List<ArticleUI>
 ): ViewModel() {
 
-
-
     companion object {
-        fun cartViewModelFactory(listOfArticlesInCart: List<ArticleInCartModel>): ViewModelProvider.Factory {
+        fun cartViewModelFactory(listOfArticlesInCart: List<ArticleUI>): ViewModelProvider.Factory {
             return object : ViewModelProvider.Factory {
                 @Suppress("UNCHECKED_CAST")
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {

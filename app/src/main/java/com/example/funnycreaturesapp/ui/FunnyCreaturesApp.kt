@@ -43,6 +43,7 @@ fun FunnyCreaturesApp(
     val articles by viewModel.articles.collectAsState()
     val articlesInCart by viewModel.articlesInCart.collectAsState()
     val favouriteArticles by viewModel.favouriteArticles.collectAsState()
+    val numberOfArticlesInCart by viewModel.cartArticlesAmount.collectAsState()
 
     Scaffold(
         topBar = {
@@ -50,7 +51,7 @@ fun FunnyCreaturesApp(
                 currentScreen = currentScreen,
                 canNavigateBack = true,
                 navigateUp = { navController.navigateUp() },
-                articlesInCart = articlesInCart.size,
+                articlesInCart = numberOfArticlesInCart,
                 onCartClicked = {
                     navController.navigate(FunnyCreaturesAppScreens.Cart.name)
                 },
@@ -87,7 +88,7 @@ fun FunnyCreaturesApp(
                         onAdClicked = { articleInOffer ->
                             navController.navigate(FunnyCreaturesAppScreens.Search.name)
                         },
-                        onFavouriteClicked = {article ->
+                        onFavouriteClicked = { article ->
                             viewModel.onClickedFavourite(article)
                         },
                         favouriteArticles = favouriteArticles,
@@ -101,7 +102,8 @@ fun FunnyCreaturesApp(
                         listOfArticles = articles,
                         onItemClicked = { navController.navigate(FunnyCreaturesAppScreens.Article.name) },
                         onFavouriteClicked = { article ->
-                            viewModel.onClickedFavourite(article)},
+                            viewModel.onClickedFavourite(article)
+                        },
                         favouritesList = favouriteArticles,
                     )
                 }
@@ -112,7 +114,7 @@ fun FunnyCreaturesApp(
                     Favourites(
                         favouriteArticles = favouriteArticles,
                         onItemClicked = { navController.navigate(FunnyCreaturesAppScreens.Article.name) },
-                        onFavouriteClicked = {article ->
+                        onFavouriteClicked = { article ->
                             viewModel.onClickedFavourite(article)
                         }
                     )
@@ -130,11 +132,11 @@ fun FunnyCreaturesApp(
                         Article(
                             selectedArticle = article,
                             onAddClicked = { addedArticle, amount ->
-                                viewModel.addToCart(addedArticle, amount)
+                                viewModel.addArticleToCart(addedArticle, amount)
                             },
                             isFavourite = (favouriteArticles.contains(selectedArticle)),
-                            onFavouriteClicked = {favouritedArticle ->
-                                                 viewModel.onClickedFavourite(favouritedArticle)
+                            onFavouriteClicked = { favouritedArticle ->
+                                viewModel.onClickedFavourite(favouritedArticle)
                             },
                         )
                     }
@@ -142,9 +144,20 @@ fun FunnyCreaturesApp(
             )
             composable(
                 route = FunnyCreaturesAppScreens.Cart.name,
-                content = { Cart(
-                    listOfArticlesInCart = articlesInCart
-                ) }
+                content = {
+                    Cart(
+                        listOfArticlesInCart = articlesInCart,
+                        onIncreaseUnitClicked = { article ->
+                            viewModel.increaseArticle(article)
+                        },
+                        onDecreaseUnitClicked = { article ->
+                            viewModel.reduceArticle(article)
+                        },
+                        onRemoveArticleClicked = { article ->
+                            viewModel.removeArticle(article)
+                        }
+                    )
+                }
             )
         }
     }
