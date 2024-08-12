@@ -6,6 +6,7 @@
     <string name="profile">Profile</string>
     <string name="article">Article</string>
     <string name="cart">Cart</string>
+    <string name="thank_you">Thank You</string>
     <string name="back_button">Back Button</string>
 
 </resources>

@@ -90,7 +90,7 @@ fun ArticleCard(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = item.price + "€",
+                        text = item.price.toString() + "€",
                     )
                     Row(
                         horizontalArrangement = Arrangement.End,

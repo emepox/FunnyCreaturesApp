@@ -16,7 +16,7 @@ data class ArticleUI(
     val id: String,
     val name: String,
     val category: Category,
-    val price: String,
+    val price: Double,
     val rating: String,
     val description: String,
     val img: String,
@@ -26,7 +26,7 @@ data class ArticleUI(
 data class ArticleInCartModel(
     val id: String,
     val name: String,
-    val price: String,
+    val price: Double,
     val category: Category,
     val img: String,
     val amount: Int,

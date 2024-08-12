@@ -94,7 +94,7 @@ fun ArticleInCart(
                     .weight(0.5f)
             ) {
                 Text(
-                    text = article.price + "€",
+                    text = article.price.toString() + "€",
                     fontSize = 20.sp,
 
                     )

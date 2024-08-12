@@ -77,7 +77,7 @@ fun Article(
                 var amount by remember { mutableStateOf("1") }
 
                 Text(
-                    text = state.price + "€",
+                    text = state.price.toString() + "€",
                     fontSize = 40.sp,
                     color = Color.Black,
                     fontWeight = FontWeight.Bold,

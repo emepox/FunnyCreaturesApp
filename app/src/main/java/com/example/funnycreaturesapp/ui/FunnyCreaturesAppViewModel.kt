@@ -29,7 +29,6 @@ class FunnyCreaturesAppViewModel(repository: List<DataSourceArticle>) : ViewMode
     val cartArticlesAmount = _cartArticlesAmount.asStateFlow()
 
     init {
-        // Call the articles repository. Assign it to the _articles variable.
         _articles.value = DataSourceArticleToUiArticle.mapToUiModelList(repository)
     }
 
@@ -105,7 +104,6 @@ class FunnyCreaturesAppViewModel(repository: List<DataSourceArticle>) : ViewMode
 
     // Favourites
     fun onClickedFavourite(article: ArticleUI) {
-
         if (favouriteArticles.value.contains(article)) {
             removeFromFavourites(article)
         } else {

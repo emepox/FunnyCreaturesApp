@@ -15,13 +15,18 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.funnycreaturesapp.models.ArticleInCartModel
 import com.example.funnycreaturesapp.ui.common.ArticleInCart
+import com.example.funnycreaturesapp.ui.viewModels.CartViewModel
 
 @Composable
 fun Cart(
@@ -29,9 +34,15 @@ fun Cart(
     onIncreaseUnitClicked: (ArticleInCartModel) -> Unit,
     onDecreaseUnitClicked: (ArticleInCartModel) -> Unit,
     onRemoveArticleClicked: (ArticleInCartModel) -> Unit,
+    onCheckoutClicked: () -> Unit,
 ) {
 
+    val viewModel: CartViewModel =
+      viewModel(factory = CartViewModel.cartViewModelFactory(listOfArticlesInCart))
 
+    LaunchedEffect(listOfArticlesInCart) {
+        viewModel.updateArticles(listOfArticlesInCart)
+    }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -48,12 +59,13 @@ fun Cart(
                     ArticleInCart(
                         article = listOfArticlesInCart[index],
                         onIncreaseAmountClicked = { article ->
-                            onIncreaseUnitClicked(article)},
+                            onIncreaseUnitClicked(article)
+                        },
                         onDecreaseAmountClicked = { article ->
-                            onDecreaseUnitClicked(article)},
-                        onRemoveArticleClicked = {article ->
+                            onDecreaseUnitClicked(article)
+                        },
+                        onRemoveArticleClicked = { article ->
                             onRemoveArticleClicked(article)
-
                         }
                     )
                     if (listOfArticlesInCart[index] != listOfArticlesInCart[0]) {
@@ -72,13 +84,20 @@ fun Cart(
                 .fillMaxWidth()
                 .padding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 5.dp)
         ) {
-            Totals()
+            Totals(viewModel, onCheckoutClicked)
         }
     }
 }
 
 @Composable
-fun Totals() {
+fun Totals(
+    viewModel: CartViewModel,
+    onCheckoutClicked: () -> Unit,
+) {
+    val subtotal by viewModel.subtotal.collectAsState()
+    val gastosDeEnvio by viewModel.gastosDeEnvio.collectAsState()
+    val discount by viewModel.discount.collectAsState()
+    val total by viewModel.total.collectAsState()
 
     Column {
         Row(
@@ -86,21 +105,21 @@ fun Totals() {
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = "Subtotal")
-            Text(text = "300€")
+            Text(text = subtotal.toString())
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = "Gastos de envío")
-            Text(text = "100€")
+            Text(text = gastosDeEnvio.toString())
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = "Discount")
-            Text(text = "25%")
+            Text(text = discount.toString())
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -111,7 +130,7 @@ fun Totals() {
                 fontWeight = FontWeight.Bold,
             )
             Text(
-                text = "1.000€",
+                text = total.toString(),
                 fontWeight = FontWeight.Bold,
             )
         }
@@ -121,9 +140,9 @@ fun Totals() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 5.dp),
-        onClick = { /*TODO*/ }
+        onClick = { onCheckoutClicked() }
     ) {
-        Text(text = "Checkout for 2.000€")
+        Text(text = "Checkout for ${total}€")
     }
 
 }

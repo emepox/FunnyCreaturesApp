@@ -12,7 +12,7 @@ object DataSourceArticleToUiArticle {
             id = UUID.randomUUID().toString(),
             name = dataSourceArticle.name,
             category = dataSourceArticle.category,
-            price = dataSourceArticle.price.toString(),
+            price = dataSourceArticle.price,
             rating = dataSourceArticle.rating.toString(),
             description = dataSourceArticle.description,
             img = uploadRemoteImage(dataSourceArticle.img),

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -155,8 +156,17 @@ fun FunnyCreaturesApp(
                         },
                         onRemoveArticleClicked = { article ->
                             viewModel.removeArticle(article)
+                        },
+                        onCheckoutClicked = {
+                            navController.navigate(FunnyCreaturesAppScreens.ThankYou.name)
                         }
                     )
+                }
+            )
+            composable(
+                route = FunnyCreaturesAppScreens.ThankYou.name,
+                content = {
+                    Text(text = "Thank you for purchasing in Funny Creatures")
                 }
             )
         }
@@ -169,5 +179,6 @@ enum class FunnyCreaturesAppScreens(@StringRes val title: Int) {
     Favourites(title = R.string.favourites),
     Profile(title = R.string.profile),
     Article(title = R.string.article),
-    Cart(title = R.string.cart)
+    Cart(title = R.string.cart),
+    ThankYou(title = R.string.thank_you),
 }
