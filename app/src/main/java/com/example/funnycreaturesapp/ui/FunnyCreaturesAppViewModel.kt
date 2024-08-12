@@ -93,6 +93,11 @@ class FunnyCreaturesAppViewModel(repository: List<DataSourceArticle>) : ViewMode
         checkCartArticlesAmount()
     }
 
+    fun cleanCart() {
+        _articlesInCart.value = emptyList()
+        checkCartArticlesAmount()
+    }
+
     private fun checkIfArticleIsInCart(id: String): Boolean =
         _articlesInCart.value.any { it.id == id}
 

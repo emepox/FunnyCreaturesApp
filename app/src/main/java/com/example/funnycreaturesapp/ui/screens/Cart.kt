@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.funnycreaturesapp.models.ArticleInCartModel
@@ -34,6 +35,7 @@ fun Cart(
     onIncreaseUnitClicked: (ArticleInCartModel) -> Unit,
     onDecreaseUnitClicked: (ArticleInCartModel) -> Unit,
     onRemoveArticleClicked: (ArticleInCartModel) -> Unit,
+    onGoBackButtonClicked: () -> Unit,
     onCheckoutClicked: () -> Unit,
 ) {
 
@@ -47,6 +49,17 @@ fun Cart(
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
+        
+        if(listOfArticlesInCart.isEmpty()) {
+            Text(
+                text = "Your cart is empty",
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp)
+            )
+        }
+        
         LazyVerticalGrid(
             columns = GridCells.Fixed(1),
             modifier = Modifier
@@ -84,7 +97,17 @@ fun Cart(
                 .fillMaxWidth()
                 .padding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 5.dp)
         ) {
-            Totals(viewModel, onCheckoutClicked)
+            if(listOfArticlesInCart.isNotEmpty()) {
+                Totals(viewModel, onCheckoutClicked)
+            } else {
+                Button(
+                    onClick = { onGoBackButtonClicked() },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                {
+                    Text(text = "Go back")
+                }
+            }
         }
     }
 }
@@ -140,7 +163,9 @@ fun Totals(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 5.dp),
-        onClick = { onCheckoutClicked() }
+        onClick = {
+            onCheckoutClicked()
+        }
     ) {
         Text(text = "Checkout for ${total}€")
     }

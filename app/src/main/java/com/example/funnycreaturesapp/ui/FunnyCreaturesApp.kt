@@ -158,7 +158,13 @@ fun FunnyCreaturesApp(
                             viewModel.removeArticle(article)
                         },
                         onCheckoutClicked = {
-                            navController.navigate(FunnyCreaturesAppScreens.ThankYou.name)
+                            if(articlesInCart.isNotEmpty()) {
+                                viewModel.cleanCart()
+                                navController.navigate(FunnyCreaturesAppScreens.ThankYou.name)
+                            }
+                        },
+                        onGoBackButtonClicked = {
+                            navController.navigateUp()
                         }
                     )
                 }
@@ -166,7 +172,10 @@ fun FunnyCreaturesApp(
             composable(
                 route = FunnyCreaturesAppScreens.ThankYou.name,
                 content = {
-                    Text(text = "Thank you for purchasing in Funny Creatures")
+                    Text(
+                        text = "Thank you for purchasing in Funny Creatures",
+                        modifier = Modifier.fillMaxWidth().padding(top = 20.dp)
+                    )
                 }
             )
         }
