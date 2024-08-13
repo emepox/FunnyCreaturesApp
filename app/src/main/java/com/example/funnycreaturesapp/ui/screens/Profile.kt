@@ -14,13 +14,16 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Profile(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier,
-    ) {
+fun Profile(
+    onLogOutClicked: () -> Unit,
+    onSaveNewCredentials: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column {
         Card(
             modifier = Modifier.padding(bottom = 10.dp)
         ) {
@@ -40,13 +43,22 @@ fun Profile(modifier: Modifier = Modifier) {
         TextField(value = "Email", onValueChange = {})
         TextField(value = "Password", onValueChange = {})
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                onSaveNewCredentials()
+            },
             modifier = Modifier
                 .padding(top = 10.dp)
                 .width(250.dp)
         ) {
             Text(text = "Save")
         }
-
+        Text(
+            text = "Log out",
+            color = Color.Blue,
+            modifier = Modifier
+                .clickable {
+                    onLogOutClicked()
+                }
+        )
     }
 }

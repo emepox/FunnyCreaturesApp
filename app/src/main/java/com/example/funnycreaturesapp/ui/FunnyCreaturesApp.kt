@@ -27,8 +27,10 @@ import com.example.funnycreaturesapp.ui.screens.Article
 import com.example.funnycreaturesapp.ui.screens.Cart
 import com.example.funnycreaturesapp.ui.screens.Favourites
 import com.example.funnycreaturesapp.ui.screens.Home
+import com.example.funnycreaturesapp.ui.screens.LogIn
 import com.example.funnycreaturesapp.ui.screens.Profile
 import com.example.funnycreaturesapp.ui.screens.Search
+import com.example.funnycreaturesapp.ui.screens.SignUp
 
 @Composable
 fun FunnyCreaturesApp(
@@ -123,7 +125,14 @@ fun FunnyCreaturesApp(
             )
             composable(
                 route = FunnyCreaturesAppScreens.Profile.name,
-                content = { Profile() }
+                content = { Profile(
+                    onLogOutClicked = {
+
+                    },
+                    onSaveNewCredentials = {
+
+                    }
+                ) }
             )
             composable(
                 route = FunnyCreaturesAppScreens.Article.name,
@@ -174,8 +183,26 @@ fun FunnyCreaturesApp(
                 content = {
                     Text(
                         text = "Thank you for purchasing in Funny Creatures",
-                        modifier = Modifier.fillMaxWidth().padding(top = 20.dp)
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 20.dp)
                     )
+                }
+            )
+            composable(
+                route = FunnyCreaturesAppScreens.LogIn.name,
+                content = {
+                    LogIn(
+                        onCreateAccountClicked = {
+                            navController.navigate(FunnyCreaturesAppScreens.SignUp.name)
+                        }
+                    )
+                }
+            )
+            composable(
+                route = FunnyCreaturesAppScreens.SignUp.name,
+                content = {
+                    SignUp()
                 }
             )
         }
@@ -190,4 +217,6 @@ enum class FunnyCreaturesAppScreens(@StringRes val title: Int) {
     Article(title = R.string.article),
     Cart(title = R.string.cart),
     ThankYou(title = R.string.thank_you),
+    LogIn(title = R.string.log_in),
+    SignUp(title = R.string.sign_up),
 }

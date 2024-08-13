@@ -7,6 +7,8 @@
     <string name="article">Article</string>
     <string name="cart">Cart</string>
     <string name="thank_you">Thank You</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
     <string name="back_button">Back Button</string>
 
 </resources>

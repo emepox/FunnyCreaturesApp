@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,7 +25,7 @@ fun NavBar(
     navController: NavHostController,
     modifier: Modifier = Modifier,
 ) {
-    Divider()
+    HorizontalDivider()
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
@@ -63,7 +64,7 @@ fun NavBar(
             modifier = modifier
                 .size(30.dp)
                 .clickable {
-                    navController.navigate(FunnyCreaturesAppScreens.Profile.name)
+                    navController.navigate(FunnyCreaturesAppScreens.LogIn.name)
                 }
         )
     }
