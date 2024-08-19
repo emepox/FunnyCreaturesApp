@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
@@ -56,8 +57,6 @@ class FunnyCreaturesAppViewModel(
         _articles.value = DataSourceArticleToUiArticle.mapToUiModelList(repository)
         // On start, check if there's an active session
         checkActiveSession()
-        favouritesChanges()
-        cartChanges()
 
     }
 
@@ -83,6 +82,8 @@ class FunnyCreaturesAppViewModel(
             _articlesInCart.value += cartArticleModel
         }
         checkCartArticlesAmount()
+        onCartChanges(_articlesInCart.value)
+
     }
 
     fun increaseArticle(article: ArticleInCartModel) {
@@ -94,6 +95,7 @@ class FunnyCreaturesAppViewModel(
             }
         }
         _articlesInCart.value = updatedArticles
+        onCartChanges(_articlesInCart.value)
         checkCartArticlesAmount()
     }
 
@@ -106,16 +108,19 @@ class FunnyCreaturesAppViewModel(
             }
         }
         _articlesInCart.value = updatedArticles
+        onCartChanges(_articlesInCart.value)
         checkCartArticlesAmount()
     }
 
     fun removeArticle(article: ArticleInCartModel) {
         _articlesInCart.value -= article
+        onCartChanges(_articlesInCart.value)
         checkCartArticlesAmount()
     }
 
     fun cleanCart() {
         _articlesInCart.value = emptyList()
+        onCartChanges(_articlesInCart.value)
         checkCartArticlesAmount()
     }
 
@@ -135,43 +140,42 @@ class FunnyCreaturesAppViewModel(
         } else {
             addToFavourites(article)
         }
+        onFavouritesChanges(_favouriteArticles.value)
     }
 
     private fun addToFavourites(article: ArticleUI) {
         _favouriteArticles.value += article
+        onFavouritesChanges(_favouriteArticles.value)
     }
 
     private fun removeFromFavourites(article: ArticleUI) {
         _favouriteArticles.value -= article
+        onFavouritesChanges(_favouriteArticles.value)
+
     }
 
     private fun clearFavourites() {
         _favouriteArticles.value = emptyList()
+        onFavouritesChanges(_favouriteArticles.value)
     }
 
     // USER
-    private suspend fun getActiveUser() {
-        viewModelScope.launch {
-            sessionManager.userSession.collect { id ->
-                id?.let {
-                    _activeUser.value = userRepository.getUserById(it)
-                }
-            }
+    private suspend fun getActiveUser(): UserSettings? =
+        sessionManager.userSession.firstOrNull()?.let { id ->
+            userRepository.getUserById(id)
         }
-    }
 
     private fun checkActiveSession() {
         viewModelScope.launch {
             // Check if there's an active session
             sessionManager.userSession
-                .map { id ->
-                    id != null // If there's a not-null ID, there's an active session
-                }
+                .map { id -> id != null } // If there's a not-null ID, there's an active session
                 .distinctUntilChanged()
                 .collect { isActive -> // Result of the checking
                     _isSessionActive.value = isActive // Assign value to variable
                     if (isActive) {
-                        getActiveUser() // Get the user and synchronize data
+                        val user = getActiveUser()
+                        _activeUser.value = user // Get the user and synchronize data
                         syncUserData()
                     }
                 }
@@ -179,57 +183,42 @@ class FunnyCreaturesAppViewModel(
     }
 
     private fun syncUserData() {
-        _articlesInCart.value = activeUser.value?.cart ?: emptyList()
-        _favouriteArticles.value = activeUser.value?.favourites ?: emptyList()
+        _activeUser.value?.let { user ->
+            _articlesInCart.value = user.cart
+            _favouriteArticles.value = user.favourites
+        }
+        checkCartArticlesAmount()
     }
 
-    private fun favouritesChanges() {
+    private fun onFavouritesChanges(list: List<ArticleUI>) {
         viewModelScope.launch {
-            isSessionActive.collect { isActive ->
-                if (isActive) {
-                    favouriteArticles.collect { listOfFavourites ->
-                        updateDatabaseFavouritesList(listOfFavourites)
-                    }
-                }
-            }
+            updateDatabaseFavouritesList(list)
         }
     }
 
-    private fun cartChanges() {
+    private fun onCartChanges(list: List<ArticleInCartModel>) {
         viewModelScope.launch {
-            isSessionActive.collect { isActive ->
-                if (isActive) {
-                    articlesInCart.collect { listOfCartArticles ->
-                        updateDatabaseCartList(listOfCartArticles)
-                    }
-                }
-            }
+            updateDatabaseCartList(list)
         }
     }
 
     private suspend fun updateDatabaseCartList(list: List<ArticleInCartModel>) {
-        viewModelScope.launch {
-            isSessionActive.collect { isActive ->
-                if (isActive) {
-                    activeUser.value?.let { user ->
-                        userRepository.updateCart(user.id, list)
-                    }
-                }
+        if (_isSessionActive.value) {
+            activeUser.value?.let { user ->
+                userRepository.updateCart(user.id, list)
             }
         }
     }
 
+
     private suspend fun updateDatabaseFavouritesList(list: List<ArticleUI>) {
-        viewModelScope.launch {
-            isSessionActive.collect { isActive ->
-                if (isActive) {
-                    activeUser.value?.let { user ->
-                        userRepository.updateFavourites(user.id, list)
-                    }
-                }
+        if (_isSessionActive.value) {
+            activeUser.value?.let { user ->
+                userRepository.updateFavourites(user.id, list)
             }
         }
     }
+
 
     fun logOut() {
         _isSessionActive.value = false
@@ -240,7 +229,9 @@ class FunnyCreaturesAppViewModel(
     fun logIn() {
         _isSessionActive.value = true
         viewModelScope.launch {
-            getActiveUser()
+            val user = getActiveUser()
+            _activeUser.value = user
+            syncUserData()
         }
         checkCartArticlesAmount()
     }
