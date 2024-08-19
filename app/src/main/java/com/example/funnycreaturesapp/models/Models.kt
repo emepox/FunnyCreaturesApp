@@ -1,7 +1,5 @@
 package com.example.funnycreaturesapp.models
 
-import com.example.funnycreaturesapp.models.DataSourceArticle.*
-
 data class DataSourceArticle(
     val name: String,
     val category: Category,

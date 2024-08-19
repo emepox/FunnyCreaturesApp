@@ -10,12 +10,12 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.funnycreaturesapp.ui.FunnyCreaturesAppScreens
@@ -23,6 +23,7 @@ import com.example.funnycreaturesapp.ui.FunnyCreaturesAppScreens
 @Composable
 fun NavBar(
     navController: NavHostController,
+    activeSession: Boolean,
     modifier: Modifier = Modifier,
 ) {
     HorizontalDivider()
@@ -61,10 +62,15 @@ fun NavBar(
         Icon(
             imageVector = Icons.Filled.AccountCircle,
             contentDescription = "Profile",
+            tint = if (activeSession) Color.Red else Color.Black,
             modifier = modifier
                 .size(30.dp)
                 .clickable {
-                    navController.navigate(FunnyCreaturesAppScreens.LogIn.name)
+                    if (activeSession) {
+                        navController.navigate(FunnyCreaturesAppScreens.Profile.name)
+                    } else {
+                        navController.navigate(FunnyCreaturesAppScreens.LogIn.name)
+                    }
                 }
         )
     }

@@ -1,5 +1,6 @@
 package com.example.funnycreaturesapp.ui
 
+import android.app.Application
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -31,6 +33,7 @@ import com.example.funnycreaturesapp.ui.screens.LogIn
 import com.example.funnycreaturesapp.ui.screens.Profile
 import com.example.funnycreaturesapp.ui.screens.Search
 import com.example.funnycreaturesapp.ui.screens.SignUp
+import com.example.funnycreaturesapp.ui.viewModels.UserSettingsViewModel
 
 @Composable
 fun FunnyCreaturesApp(
@@ -40,13 +43,23 @@ fun FunnyCreaturesApp(
     val currentScreen = FunnyCreaturesAppScreens.valueOf(
         backStackEntry?.destination?.route ?: FunnyCreaturesAppScreens.Home.name
     )
-    val repository: List<DataSourceArticle> = DataSourceImpl.dataSourceArticles
+    val context = LocalContext.current
+    val application = context.applicationContext as Application
+    // Data
+    val sourceArticles: List<DataSourceArticle> = DataSourceImpl.dataSourceArticles
     val viewModel: FunnyCreaturesAppViewModel =
-        viewModel(factory = FunnyCreaturesAppViewModel.funnyCreaturesAppViewModelFactory(repository))
+        viewModel(factory = FunnyCreaturesAppViewModel.funnyCreaturesAppViewModelFactory(sourceArticles, application))
+    // User settings
+    val userSettingsViewModel: UserSettingsViewModel =
+        viewModel(factory = UserSettingsViewModel.userCredentialsViewModelFactory(application))
+    val activeUser by viewModel.activeUser.collectAsState()
+    val isSessionActive by viewModel.isSessionActive.collectAsState()
+    // Articles
     val articles by viewModel.articles.collectAsState()
     val articlesInCart by viewModel.articlesInCart.collectAsState()
-    val favouriteArticles by viewModel.favouriteArticles.collectAsState()
     val numberOfArticlesInCart by viewModel.cartArticlesAmount.collectAsState()
+    // Favourites
+    val favouriteArticles by viewModel.favouriteArticles.collectAsState()
 
     Scaffold(
         topBar = {
@@ -65,6 +78,7 @@ fun FunnyCreaturesApp(
         bottomBar = {
             NavBar(
                 navController = navController,
+                activeSession = isSessionActive,
                 Modifier.padding(top = 5.dp)
             )
         },
@@ -125,14 +139,16 @@ fun FunnyCreaturesApp(
             )
             composable(
                 route = FunnyCreaturesAppScreens.Profile.name,
-                content = { Profile(
-                    onLogOutClicked = {
-
-                    },
-                    onSaveNewCredentials = {
-
-                    }
-                ) }
+                content = {
+                    Profile(
+                        onLogOutClicked = {
+                            viewModel.logOut()
+                            navController.navigate(FunnyCreaturesAppScreens.Home.name)
+                        },
+                        viewModel = userSettingsViewModel,
+                        activeUser = activeUser,
+                    )
+                }
             )
             composable(
                 route = FunnyCreaturesAppScreens.Article.name,
@@ -167,7 +183,7 @@ fun FunnyCreaturesApp(
                             viewModel.removeArticle(article)
                         },
                         onCheckoutClicked = {
-                            if(articlesInCart.isNotEmpty()) {
+                            if (articlesInCart.isNotEmpty()) {
                                 viewModel.cleanCart()
                                 navController.navigate(FunnyCreaturesAppScreens.ThankYou.name)
                             }
@@ -195,6 +211,11 @@ fun FunnyCreaturesApp(
                     LogIn(
                         onCreateAccountClicked = {
                             navController.navigate(FunnyCreaturesAppScreens.SignUp.name)
+                        },
+                        viewModel = userSettingsViewModel,
+                        onLogInSuccessful = {
+                            viewModel.logIn()
+                            navController.navigate(FunnyCreaturesAppScreens.Profile.name)
                         }
                     )
                 }
@@ -202,7 +223,12 @@ fun FunnyCreaturesApp(
             composable(
                 route = FunnyCreaturesAppScreens.SignUp.name,
                 content = {
-                    SignUp()
+                    SignUp(
+                        viewModel = userSettingsViewModel,
+                        onAccountCreated = {
+                            navController.navigate(FunnyCreaturesAppScreens.LogIn.name)
+                        }
+                    )
                 }
             )
         }
