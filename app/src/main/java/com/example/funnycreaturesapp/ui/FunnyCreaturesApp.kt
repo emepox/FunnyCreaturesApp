@@ -50,10 +50,9 @@ fun FunnyCreaturesApp(
     val viewModel: FunnyCreaturesAppViewModel =
         viewModel(factory = FunnyCreaturesAppViewModel.funnyCreaturesAppViewModelFactory(sourceArticles, application))
     // User settings
+    val isSessionActive by viewModel.isSessionActive.collectAsState()
     val userSettingsViewModel: UserSettingsViewModel =
         viewModel(factory = UserSettingsViewModel.userCredentialsViewModelFactory(application))
-    val activeUser by viewModel.activeUser.collectAsState()
-    val isSessionActive by viewModel.isSessionActive.collectAsState()
     // Articles
     val articles by viewModel.articles.collectAsState()
     val articlesInCart by viewModel.articlesInCart.collectAsState()
@@ -146,7 +145,7 @@ fun FunnyCreaturesApp(
                             navController.navigate(FunnyCreaturesAppScreens.Home.name)
                         },
                         viewModel = userSettingsViewModel,
-                        activeUser = activeUser,
+                        isSessionActive = isSessionActive,
                     )
                 }
             )

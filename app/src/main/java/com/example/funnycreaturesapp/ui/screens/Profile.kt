@@ -18,6 +18,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,7 +30,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.funnycreaturesapp.models.UserSettings
 import com.example.funnycreaturesapp.ui.viewModels.UserSettingsViewModel
 import kotlinx.coroutines.launch
 
@@ -37,7 +37,7 @@ import kotlinx.coroutines.launch
 fun Profile(
     onLogOutClicked: () -> Unit,
     viewModel: UserSettingsViewModel,
-    activeUser: UserSettings?,
+    isSessionActive: Boolean,
     modifier: Modifier = Modifier
 ) {
 
@@ -46,6 +46,10 @@ fun Profile(
     var username by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+
+    val activeUserUsername by viewModel.username.collectAsState()
+    val activeUserEmail by viewModel.email.collectAsState()
+    val activeUserPassword by viewModel.password.collectAsState()
 
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
@@ -75,7 +79,7 @@ fun Profile(
                         .clickable { } // TODO
                 )
             }
-            activeUser?.let {
+            if (isSessionActive) {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -96,7 +100,7 @@ fun Profile(
                             fontWeight = FontWeight.Bold,
                         )
                         Text(
-                            text = activeUser.username ?: username
+                            text = activeUserUsername ?: username
                         )
                         HorizontalDivider()
                     }
@@ -107,7 +111,7 @@ fun Profile(
                             fontWeight = FontWeight.Bold,
                         )
                         Text(
-                            text = activeUser.email ?: email
+                            text = activeUserEmail ?: email
                         )
                         HorizontalDivider()
                     }
@@ -117,7 +121,7 @@ fun Profile(
                             fontWeight = FontWeight.Bold,
                         )
                         Text(
-                            text = activeUser.password ?: password
+                            text = activeUserPassword ?: password
                         )
                     }
 

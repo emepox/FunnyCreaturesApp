@@ -33,7 +33,7 @@ class FunnyCreaturesAppViewModel(
 
     // USER SETTINGS
     private var _activeUser = MutableStateFlow<UserSettings?>(UserSettings())
-    val activeUser = _activeUser.asStateFlow()
+    private val activeUser = _activeUser.asStateFlow()
     private var _isSessionActive = MutableStateFlow(false)
     val isSessionActive = _isSessionActive.asStateFlow()
 
