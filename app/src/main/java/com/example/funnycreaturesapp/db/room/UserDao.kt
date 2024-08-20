@@ -19,6 +19,19 @@ interface UserDao {
     @Query("SELECT * FROM user_table WHERE id = :id LIMIT 1")
     suspend fun getUserById(id: Int): UserSettings?
 
+    @Query("UPDATE user_table SET " +
+            "username = COALESCE(:username, username)," +
+            "email = COALESCE(:email, email)," +
+            "password = COALESCE(:password, password)" +
+            "WHERE id = :id"
+    )
+    suspend fun updateUserFields(
+        id: Int,
+        username: String?,
+        email: String?,
+        password: String?,
+    )
+
     @Update
     suspend fun updateUser(user: UserSettings)
 }

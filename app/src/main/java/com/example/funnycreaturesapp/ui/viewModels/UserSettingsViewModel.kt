@@ -8,6 +8,7 @@ import com.example.funnycreaturesapp.models.UserSettings
 import com.example.funnycreaturesapp.db.dataStore.SessionManager
 import com.example.funnycreaturesapp.db.room.AppDatabase
 import com.example.funnycreaturesapp.db.room.UserRepository
+import kotlinx.coroutines.flow.first
 
 class UserSettingsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -44,6 +45,18 @@ class UserSettingsViewModel(application: Application) : AndroidViewModel(applica
     suspend fun logOut() {
         sessionManager.clearSession()
     }
+
+    suspend fun saveNewData(username: String, email: String, password: String) {
+        sessionManager.userSession.first()?.run {
+            userRepository.updateUserFields(
+                id = this,
+                username = username.ifEmpty { null },
+                email = email.ifEmpty { null },
+                password = password.ifEmpty { null },
+            )
+        }
+    }
+
 
     companion object {
         fun userCredentialsViewModelFactory(application: Application): ViewModelProvider.Factory {

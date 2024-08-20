@@ -10,7 +10,9 @@ class UserRepository(private val userDao: UserDao) {
         userDao.getUser(username, password)
 
     suspend fun getUserById(id: Int): UserSettings? = userDao.getUserById(id)
-    private suspend fun updateUser(user: UserSettings) = userDao.updateUser(user)
+    suspend fun updateUserFields(id: Int, username: String?, email: String?, password: String?) =
+        userDao.updateUserFields(id, username, email, password)
+
     suspend fun updateCart(userId: Int, newCartList: List<ArticleInCartModel>) {
         userDao.getUserById(userId)?.let { user ->
             userDao.updateUser(user.copy(cart = newCartList))
