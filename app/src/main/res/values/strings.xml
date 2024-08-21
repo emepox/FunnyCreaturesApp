@@ -5,10 +5,57 @@
     <string name="favourites">Favourites</string>
     <string name="profile">Profile</string>
     <string name="article">Article</string>
+    <string name="categories">Categories</string>
     <string name="cart">Cart</string>
     <string name="thank_you">Thank You</string>
     <string name="log_in">Log in</string>
     <string name="sign_up">Sign up</string>
     <string name="back_button">Back Button</string>
+    <string name="article_in_offer">%1$s in offer!</string>
+    <string name="discount_amount">%1$d%% discount!</string>
+    <string name="profile_picture">Profile picture</string>
+    <string name="change_image">Change image</string>
+    <string name="your_data">Your data</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="change_data">Change your data</string>
+    <string name="save">Save</string>
+    <string name="log_out">Log out</string>
+    <string name="euro">€</string>
+    <string name="one">1</string>
+    <string name="add">Add</string>
+    <string name="is_favourite">Is favourite</string>
+    <string name="rating">Rating</string>
+    <string name="on_sale">On sale</string>
+    <string name="remove_article">Remove article</string>
+    <string name="see_all">See all</string>
+    <string name="items_cart">Items in cart</string>
+    <string name="empty_cart">Your cart is empty</string>
+    <string name="go_back">Go back</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="shipping">Shipping cost</string>
+    <string name="discount">Discount</string>
+    <string name="total">TOTAL</string>
+    <string name="checkout_amount">Checkout for %.2f€</string>
+    <string name="create_account">Create an account</string>
+    <string name="type">Type here</string>
+    <string name="thank_you_message">Thank you for purchasing in Funny Creatures</string>
+    <string name="no_favourites">You don\'t have favourites yet</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </resources>

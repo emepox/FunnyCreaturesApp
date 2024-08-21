@@ -13,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -197,7 +198,7 @@ fun FunnyCreaturesApp(
                 route = FunnyCreaturesAppScreens.ThankYou.name,
                 content = {
                     Text(
-                        text = "Thank you for purchasing in Funny Creatures",
+                        text = stringResource(id = R.string.thank_you_message),
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 20.dp)

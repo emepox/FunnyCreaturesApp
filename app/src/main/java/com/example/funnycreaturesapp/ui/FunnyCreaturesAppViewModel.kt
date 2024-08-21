@@ -204,7 +204,7 @@ class FunnyCreaturesAppViewModel(
 
     private suspend fun updateDatabaseCartList(list: List<ArticleInCartModel>) {
         if (_isSessionActive.value) {
-            activeUser.value?.let { user ->
+            _activeUser.value?.let { user ->
                 userRepository.updateCart(user.id, list)
             }
         }
@@ -213,7 +213,7 @@ class FunnyCreaturesAppViewModel(
 
     private suspend fun updateDatabaseFavouritesList(list: List<ArticleUI>) {
         if (_isSessionActive.value) {
-            activeUser.value?.let { user ->
+            _activeUser.value?.let { user ->
                 userRepository.updateFavourites(user.id, list)
             }
         }

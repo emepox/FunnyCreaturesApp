@@ -1,5 +1,6 @@
 package com.example.funnycreaturesapp.ui.common
 
+import android.provider.Settings.Global.getString
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,11 +17,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.imageLoader
+import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.utils.AdvertisementCreator.*
 
 @Composable
@@ -47,14 +50,14 @@ fun Ad(
                 .fillMaxHeight()
         ) {
             Text(
-                text = "¡${ad.article} en oferta!",
+                text = stringResource(R.string.article_in_offer, ad.article),
                 textAlign = TextAlign.Center,
                 fontSize = 35.sp,
                 lineHeight = 35.sp,
             )
 
             Text(
-                text = "${ad.discount}% descuento",
+                text = stringResource(R.string.discount_amount, ad.discount),
                 color = Color.White,
                 textAlign = TextAlign.Center,
                 modifier = Modifier

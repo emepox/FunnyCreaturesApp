@@ -6,7 +6,7 @@ data class DataSourceArticle(
     val price: Double,
     val rating: Double,
     val img: String,
-    val description: String = "Lorem Ipsum",
+    val description: String,
     val isInOffer: Boolean = false,
 )
 
@@ -31,9 +31,5 @@ data class ArticleInCartModel(
 )
 
 enum class Category {
-    MONSTER, FOOD, PART, ACCESSORIES,
-}
-
-enum class Name {
-    DRAGONINO, HOMININO, AVININO, ENTRAÑAS, CASQUERÍA, JAULA,
+    MONSTER, FOOD, ACCESSORIES,
 }

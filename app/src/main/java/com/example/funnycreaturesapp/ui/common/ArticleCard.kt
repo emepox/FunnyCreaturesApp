@@ -23,10 +23,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.imageLoader
+import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.data.DataSourceImpl
 import com.example.funnycreaturesapp.data.mappers.DataSourceArticleToUiArticle
 import com.example.funnycreaturesapp.models.ArticleUI
@@ -64,7 +66,7 @@ fun ArticleCard(
                     )
                     Icon(
                         imageVector = if (isFavourite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
-                        contentDescription = "Is favourite",
+                        contentDescription = stringResource(id = R.string.is_favourite),
                         modifier = Modifier
                             .padding(10.dp)
                             .clickable {
@@ -90,7 +92,7 @@ fun ArticleCard(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = item.price.toString() + "€",
+                        text = item.price.toString() + stringResource(id = R.string.euro),
                     )
                     Row(
                         horizontalArrangement = Arrangement.End,
@@ -98,7 +100,7 @@ fun ArticleCard(
                     ) {
                         Icon(
                             imageVector = Icons.Filled.Star,
-                            contentDescription = "Rating",
+                            contentDescription = stringResource(id = R.string.is_favourite),
                         )
                         Text(
                             text = item.rating,

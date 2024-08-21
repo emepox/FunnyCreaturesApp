@@ -16,7 +16,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.ui.viewModels.UserSettingsViewModel
 import kotlinx.coroutines.launch
 
@@ -40,19 +42,19 @@ fun SignUp(
     ) {
         TextField(
             value = username,
-            placeholder = { Text(text = "Username") },
+            placeholder = { Text(text = stringResource(id = R.string.username)) },
             onValueChange = {
                 username = it
             })
         TextField(
             value = email,
-            placeholder = { Text(text = "Email") },
+            placeholder = { Text(text = stringResource(id = R.string.email)) },
             onValueChange = {
                 email = it
             })
         TextField(
             value = password,
-            placeholder = { Text(text = "Password") },
+            placeholder = { Text(stringResource(id = R.string.password)) },
             onValueChange = {
                 password = it
             })
@@ -71,7 +73,7 @@ fun SignUp(
                 .padding(top = 10.dp)
                 .width(250.dp)
         ) {
-            Text(text = "Save")
+            Text(text = stringResource(id = R.string.save))
         }
     }
 }

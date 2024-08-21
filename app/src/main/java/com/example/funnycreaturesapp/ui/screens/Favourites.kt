@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.models.ArticleUI
 import com.example.funnycreaturesapp.ui.common.Articles
 
@@ -19,7 +21,7 @@ fun Favourites(
 ) {
     if(favouriteArticles.isEmpty()) {
         Text(
-            text = "You don't have favourites yet",
+            text = stringResource(id = R.string.no_favourites),
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()

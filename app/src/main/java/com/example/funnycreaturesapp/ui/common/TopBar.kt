@@ -51,7 +51,7 @@ fun TopBar(
                 .background(Color.DarkGray)
         ) {
             Text(
-                text = "Funny Creatures",
+                text = stringResource(id = R.string.app_name),
                 fontWeight = FontWeight.Bold,
                 letterSpacing = 10.sp,
                 textAlign = TextAlign.Center,
@@ -85,7 +85,7 @@ fun TopBar(
                     content = {
                         Icon(
                             imageVector = Icons.Filled.ShoppingCart,
-                            contentDescription = "Items in cart",
+                            contentDescription = stringResource(id = R.string.items_cart),
                             modifier = Modifier
                                 .size(30.dp)
                                 .clickable {

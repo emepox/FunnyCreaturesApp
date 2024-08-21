@@ -27,9 +27,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.ui.viewModels.UserSettingsViewModel
 import kotlinx.coroutines.launch
 
@@ -69,11 +71,11 @@ fun Profile(
             ) {
                 Icon(
                     imageVector = Icons.Filled.AccountCircle,
-                    contentDescription = "Profile picture",
+                    contentDescription = stringResource(id = R.string.profile_picture),
                     modifier = Modifier.size(100.dp),
                 )
                 Text(
-                    text = "Change image",
+                    text = stringResource(id = R.string.change_image),
                     modifier = Modifier
                         .padding(10.dp)
                         .clickable { } // TODO
@@ -88,7 +90,7 @@ fun Profile(
                 ) {
 
                     Text(
-                        text = "Your data",
+                        text = stringResource(id = R.string.your_data),
                         textAlign = TextAlign.Center,
                         modifier = Modifier
                             .fillMaxWidth()
@@ -96,32 +98,32 @@ fun Profile(
                     )
                     Column(modifier = Modifier.padding(vertical = 5.dp, horizontal = 10.dp)) {
                         Text(
-                            text = "Username",
+                            text = stringResource(id = R.string.username),
                             fontWeight = FontWeight.Bold,
                         )
                         Text(
-                            text = activeUserUsername ?: username
+                            text = activeUserUsername
                         )
                         HorizontalDivider()
                     }
 
                     Column(modifier = Modifier.padding(vertical = 5.dp, horizontal = 10.dp)) {
                         Text(
-                            text = "Email",
+                            text = stringResource(id = R.string.email),
                             fontWeight = FontWeight.Bold,
                         )
                         Text(
-                            text = activeUserEmail ?: email
+                            text = activeUserEmail
                         )
                         HorizontalDivider()
                     }
                     Column(modifier = Modifier.padding(vertical = 5.dp, horizontal = 10.dp)) {
                         Text(
-                            text = "Password",
+                            text = stringResource(id = R.string.password),
                             fontWeight = FontWeight.Bold,
                         )
                         Text(
-                            text = activeUserPassword ?: password
+                            text = activeUserPassword
                         )
                     }
 
@@ -133,7 +135,7 @@ fun Profile(
             modifier = Modifier
         ) {
             Text(
-                text = "Change your data",
+                text = stringResource(id = R.string.change_data),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -142,7 +144,11 @@ fun Profile(
             TextField(
                 value = username,
                 onValueChange = { username = it },
-                placeholder = { Text(text = "Username") },
+                placeholder = { Text(
+                    text = stringResource(
+                        id = R.string.username
+                    ),
+                ) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 5.dp)
@@ -150,7 +156,11 @@ fun Profile(
             TextField(
                 value = email,
                 onValueChange = { email = it },
-                placeholder = { Text(text = "Email") },
+                placeholder = { Text(
+                    text = stringResource(
+                        id = R.string.email
+                    ),
+                ) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 5.dp)
@@ -159,7 +169,11 @@ fun Profile(
             TextField(
                 value = password,
                 onValueChange = { password = it },
-                placeholder = { Text(text = "Password") },
+                placeholder = { Text(
+                    text = stringResource(
+                        id = R.string.password
+                    ),
+                ) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 5.dp, end = 5.dp, bottom = 10.dp)
@@ -187,10 +201,10 @@ fun Profile(
                     .padding(top = 10.dp)
                     .width(250.dp)
             ) {
-                Text(text = "Save")
+                Text(text = stringResource(id = R.string.save))
             }
             Text(
-                text = "Log out",
+                text = stringResource(id = R.string.log_out),
                 color = Color.Blue,
                 textAlign = TextAlign.Center,
                 modifier = Modifier

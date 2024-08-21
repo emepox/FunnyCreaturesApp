@@ -40,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -48,6 +49,7 @@ import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.imageLoader
+import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.models.ArticleUI
 import com.example.funnycreaturesapp.ui.viewModels.ArticleViewModel
 
@@ -77,7 +79,7 @@ fun Article(
                 var amount by remember { mutableStateOf("1") }
 
                 Text(
-                    text = state.price.toString() + "€",
+                    text = state.price.toString() + stringResource(id = R.string.euro),
                     fontSize = 40.sp,
                     color = Color.Black,
                     fontWeight = FontWeight.Bold,
@@ -93,7 +95,9 @@ fun Article(
                     modifier = Modifier.width(60.dp),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     singleLine = true,
-                    placeholder = { Text(text = "1") }
+                    placeholder = { 
+                        Text(text = stringResource(id = R.string.one)) 
+                    }
                 )
 
                 Button(
@@ -106,7 +110,7 @@ fun Article(
                     modifier = Modifier,
                 ) {
                     Text(
-                        text = "Add",
+                        text = stringResource(id = R.string.add),
                         fontSize = 20.sp,
                         color = Color.Black,
                         modifier = Modifier.padding(10.dp)
@@ -138,7 +142,7 @@ fun Article(
                     )
                 Icon(
                     imageVector = if (isFavourite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
-                    contentDescription = "Is favourite",
+                    contentDescription = stringResource(id = R.string.is_favourite),
                     modifier = Modifier
                         .padding(10.dp)
                         .clickable {
@@ -164,7 +168,7 @@ fun Article(
                         ),
                     ) {
                         Text(
-                            text = "On Sale",
+                            text = stringResource(id = R.string.on_sale),
                             color = Color.White,
                             modifier = Modifier.padding(5.dp),
                         )
@@ -180,7 +184,7 @@ fun Article(
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Filled.Star,
-                            contentDescription = "Rating",
+                            contentDescription = stringResource(id = R.string.rating),
                         )
                     },
                 )

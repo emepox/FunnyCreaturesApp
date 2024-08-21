@@ -10,7 +10,7 @@ interface DataSource {
 object DataSourceImpl : DataSource {
     override val dataSourceArticles: List<DataSourceArticle> = listOf(
         DataSourceArticle(
-            name = "Alimaña",
+            name = "Critter",
             category = FOOD,
             price = 200.00,
             rating = 4.5,

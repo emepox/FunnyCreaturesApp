@@ -21,10 +21,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.models.ArticleInCartModel
 import com.example.funnycreaturesapp.ui.common.ArticleInCart
 import com.example.funnycreaturesapp.ui.viewModels.CartViewModel
@@ -52,7 +54,7 @@ fun Cart(
         
         if(listOfArticlesInCart.isEmpty()) {
             Text(
-                text = "Your cart is empty",
+                text = stringResource(id = R.string.empty_cart),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -105,7 +107,7 @@ fun Cart(
                     modifier = Modifier.fillMaxWidth(),
                 )
                 {
-                    Text(text = "Go back")
+                    Text(text = stringResource(id = R.string.go_back))
                 }
             }
         }
@@ -118,7 +120,7 @@ fun Totals(
     onCheckoutClicked: () -> Unit,
 ) {
     val subtotal by viewModel.subtotal.collectAsState()
-    val gastosDeEnvio by viewModel.gastosDeEnvio.collectAsState()
+    val gastosDeEnvio by viewModel.shippingCosts.collectAsState()
     val discount by viewModel.discount.collectAsState()
     val total by viewModel.total.collectAsState()
 
@@ -127,21 +129,21 @@ fun Totals(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = "Subtotal")
+            Text(text = stringResource(id = R.string.subtotal))
             Text(text = subtotal.toString())
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = "Gastos de envío")
+            Text(text = stringResource(id = R.string.shipping))
             Text(text = gastosDeEnvio.toString())
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = "Discount")
+            Text(text = stringResource(id = R.string.discount))
             Text(text = discount.toString())
         }
         Row(
@@ -149,7 +151,7 @@ fun Totals(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = "TOTAL",
+                text = stringResource(id = R.string.total),
                 fontWeight = FontWeight.Bold,
             )
             Text(
@@ -167,7 +169,7 @@ fun Totals(
             onCheckoutClicked()
         }
     ) {
-        Text(text = "Checkout for ${total}€")
+        Text(text = stringResource(id = R.string.checkout_amount, total))
     }
 
 }

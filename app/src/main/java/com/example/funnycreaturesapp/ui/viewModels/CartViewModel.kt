@@ -15,8 +15,8 @@ class CartViewModel(
     private var _subtotal = MutableStateFlow(0.0)
     val subtotal = _subtotal.asStateFlow()
 
-    private var _gastosDeEnvio = MutableStateFlow(0.0)
-    val gastosDeEnvio = _gastosDeEnvio.asStateFlow()
+    private var _shippingCosts = MutableStateFlow(0.0)
+    val shippingCosts = _shippingCosts.asStateFlow()
 
     private var _discount = MutableStateFlow(0.0)
     val discount = _discount.asStateFlow()
@@ -36,8 +36,8 @@ class CartViewModel(
     private fun updateTotals() {
         _subtotal.value = _listOfArticles.value.sumOf { it.amount * it.price }
         _discount.value = (_subtotal.value * 25) / 100
-        _gastosDeEnvio.value = SHIPPING
-        _total.value = _subtotal.value + _gastosDeEnvio.value - _discount.value
+        _shippingCosts.value = SHIPPING
+        _total.value = _subtotal.value + _shippingCosts.value - _discount.value
     }
 
     companion object {

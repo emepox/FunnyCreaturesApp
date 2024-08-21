@@ -11,8 +11,8 @@ val listOfUrlImages = listOf(
     "dragonino_7",
     "dragonino_8",
     "dragonino_9",
-    "alimaña_0",
-    "alimaña_1",
+    "critter_0",
+    "critter_1",
     "acuanino_0",
     "avinino_0",
     "avinino_1",
@@ -23,11 +23,10 @@ val listOfUrlImages = listOf(
     "jaula_0",
     "jaula_1",
     "jaula_2",
-    "entrañas_0",
-    "entrañas_1",
-
+    "entrails_0",
+    "entrails_1",
     )
 
 val listOfAds = listOf(
-    "ad_casquería_0",
+    "ad_entrails_0",
 )

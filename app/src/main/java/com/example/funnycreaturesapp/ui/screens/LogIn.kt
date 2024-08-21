@@ -19,7 +19,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.ui.viewModels.UserSettingsViewModel
 import kotlinx.coroutines.launch
 
@@ -44,12 +46,12 @@ fun LogIn(
         TextField(
             value = username,
             onValueChange = { username = it },
-            placeholder = { Text(text = "Username")}
+            placeholder = { Text(text = stringResource(id = R.string.username))}
         )
         TextField(
             value = password,
             onValueChange = { password = it },
-            placeholder = { Text(text = "Password")}
+            placeholder = { Text(text = stringResource(id = R.string.password))}
 
         )
         Button(
@@ -62,10 +64,10 @@ fun LogIn(
                 .padding(top = 10.dp)
                 .width(250.dp)
         ) {
-            Text(text = "Log in")
+            Text(text = stringResource(id = R.string.log_in))
         }
         Text(
-            text = "Create an account",
+            text = stringResource(id = R.string.create_account),
             color = Color.Blue,
             modifier = Modifier
                 .padding(10.dp)

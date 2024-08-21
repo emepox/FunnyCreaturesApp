@@ -19,12 +19,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.data.DataSamples
 import com.example.funnycreaturesapp.models.ArticleInCartModel
 import com.example.funnycreaturesapp.utils.RemoteImageUploader
@@ -79,7 +81,7 @@ fun ArticleInCart(
                 }
                 Icon(
                     imageVector = Icons.Filled.Clear,
-                    contentDescription = "Remove article",
+                    contentDescription = stringResource(id = R.string.remove_article),
                     modifier = Modifier
                         .clickable {
                             onRemoveArticleClicked(article)
@@ -94,7 +96,7 @@ fun ArticleInCart(
                     .weight(0.5f)
             ) {
                 Text(
-                    text = article.price.toString() + "€",
+                    text = article.price.toString() + stringResource(id = R.string.euro),
                     fontSize = 20.sp,
 
                     )
@@ -118,7 +120,7 @@ fun CartCounter(
     Row {
         Icon(
             imageVector = Icons.Filled.KeyboardArrowDown,
-            contentDescription = "Remove",
+            contentDescription = stringResource(id = R.string.remove_article),
             modifier = Modifier
                 .border(1.dp, color = Color.Gray)
                 .clickable {
@@ -131,7 +133,7 @@ fun CartCounter(
         )
         Icon(
             imageVector = Icons.Filled.KeyboardArrowUp,
-            contentDescription = "Add",
+            contentDescription = stringResource(id = R.string.add),
             modifier = Modifier
                 .border(1.dp, color = Color.Gray)
                 .clickable {

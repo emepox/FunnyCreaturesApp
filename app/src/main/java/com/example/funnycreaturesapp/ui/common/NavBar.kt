@@ -16,8 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.ui.FunnyCreaturesAppScreens
 
 @Composable
@@ -34,7 +36,7 @@ fun NavBar(
     ) {
         Icon(
             imageVector = Icons.Filled.Home,
-            contentDescription = "Home",
+            contentDescription = stringResource(id = R.string.home),
             modifier = modifier
                 .size(30.dp)
                 .clickable {
@@ -43,7 +45,7 @@ fun NavBar(
         )
         Icon(
             imageVector = Icons.Filled.Search,
-            contentDescription = "Search",
+            contentDescription = stringResource(id = R.string.search),
             modifier = modifier
                 .size(30.dp)
                 .clickable {
@@ -52,7 +54,7 @@ fun NavBar(
         )
         Icon(
             imageVector = Icons.Filled.Favorite,
-            contentDescription = "Favourites",
+            contentDescription = stringResource(id = R.string.favourites),
             modifier = modifier
                 .size(30.dp)
                 .clickable {
@@ -61,7 +63,7 @@ fun NavBar(
         )
         Icon(
             imageVector = Icons.Filled.AccountCircle,
-            contentDescription = "Profile",
+            contentDescription = stringResource(id = R.string.profile),
             tint = if (activeSession) Color.Red else Color.Black,
             modifier = modifier
                 .size(30.dp)

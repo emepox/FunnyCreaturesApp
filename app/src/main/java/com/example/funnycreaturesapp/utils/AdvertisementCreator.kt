@@ -22,7 +22,7 @@ class AdvertisementCreator {
             val name = partialUrl
                 .replace("ad_", "")
                 .replace(
-                    Regex("_\\d+"), " "
+                    Regex("_\\d+"), ""
                 ).replaceFirstChar { it.uppercaseChar() }
             return name
         }

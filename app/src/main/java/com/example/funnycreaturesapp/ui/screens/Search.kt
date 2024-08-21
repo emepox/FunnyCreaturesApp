@@ -11,7 +11,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.models.ArticleUI
 import com.example.funnycreaturesapp.ui.common.Articles
 import com.example.funnycreaturesapp.ui.viewModels.SearchViewModel
@@ -42,7 +44,7 @@ fun Search(
                 expanded = true,
                 onExpandedChange = { expanded = it },
                 onSearch = { viewModel.filterArticlesByQuery(query) },
-                placeholder = { Text(text = "Type here") },
+                placeholder = { Text(text = stringResource(id = R.string.type)) },
             )
         },
         expanded = true,
