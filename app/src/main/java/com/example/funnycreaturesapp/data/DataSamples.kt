@@ -7,31 +7,6 @@ import com.example.funnycreaturesapp.models.Category.*
 import com.example.funnycreaturesapp.models.DataSourceArticle
 
 object DataSamples {
-    val sampleOfDataSourceArticles = listOf(
-        DataSourceArticle(
-            name = "Alimaña",
-            category = FOOD,
-            price = 200.00,
-            rating = 4.5,
-            img = "alimaña",
-            description = "Mole hands with all their claws and little wrinkles. Mole hands with all their claws and little wrinkles. Mole hands with all their claws and little wrinkles. Mole hands with all their claws and little wrinkles. Mole hands with all their claws and little wrinkles. Mole hands with all their claws and little wrinkles. "
-        ),
-        DataSourceArticle(
-            name = "Dragonino",
-            category = PART,
-            price = 200.00,
-            rating = 4.8,
-            img = "dragonino",
-        ),
-        DataSourceArticle(
-            name = "Hominino",
-            category = MONSTER,
-            price = 200.00,
-            rating = 3.5,
-            img = "hominino",
-        ),
-    )
-
     val sampleOfUIArticles = listOf(
         ArticleUI(
             id = "123",

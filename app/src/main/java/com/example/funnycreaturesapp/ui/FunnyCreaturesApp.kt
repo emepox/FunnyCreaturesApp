@@ -22,7 +22,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.funnycreaturesapp.R
-import com.example.funnycreaturesapp.data.DataSourceImpl
+import com.example.funnycreaturesapp.data.DataSourceFactoryImpl
 import com.example.funnycreaturesapp.models.DataSourceArticle
 import com.example.funnycreaturesapp.ui.common.NavBar
 import com.example.funnycreaturesapp.ui.common.TopBar
@@ -47,7 +47,7 @@ fun FunnyCreaturesApp(
     val context = LocalContext.current
     val application = context.applicationContext as Application
     // Data
-    val sourceArticles: List<DataSourceArticle> = DataSourceImpl.dataSourceArticles
+    val sourceArticles: List<DataSourceArticle> = DataSourceFactoryImpl.dataSourceArticles
     val viewModel: FunnyCreaturesAppViewModel =
         viewModel(factory = FunnyCreaturesAppViewModel.funnyCreaturesAppViewModelFactory(sourceArticles, application))
     // User settings

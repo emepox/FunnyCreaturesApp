@@ -54,7 +54,7 @@ fun Home(
             onSeeAllClicked = { viewModel.resetArticlesFilter() }
         )
         Articles(
-            articles = articles,
+            articles = articles.shuffled(),
             onItemClicked = { articleId ->
                 onItemClicked(articleId)
             },

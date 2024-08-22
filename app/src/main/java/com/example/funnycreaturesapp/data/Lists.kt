@@ -20,9 +20,9 @@ val listOfUrlImages = listOf(
     "avinino_3",
     "hominino_0",
     "hominino_1",
-    "jaula_0",
-    "jaula_1",
-    "jaula_2",
+    "cage_0",
+    "cage_1",
+    "cage_2",
     "entrails_0",
     "entrails_1",
     )

@@ -33,3 +33,15 @@ data class ArticleInCartModel(
 enum class Category {
     MONSTER, FOOD, ACCESSORIES,
 }
+
+enum class Monsters {
+    AVININO, DRAGONINO, HOMININO
+}
+
+enum class Food {
+    CRITTER, ENTRAILS,
+}
+
+enum class Accessories {
+    CAGE,
+}
