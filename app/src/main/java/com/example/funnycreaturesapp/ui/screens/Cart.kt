@@ -12,7 +12,9 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -20,7 +22,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -93,7 +94,7 @@ fun Cart(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .background(
-                    color = Color.LightGray,
+                    color = MaterialTheme.colorScheme.secondary,
                     shape = RoundedCornerShape(topStartPercent = 10, topEndPercent = 10)
                 )
                 .fillMaxWidth()
@@ -165,6 +166,9 @@ fun Totals(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 5.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+        ),
         onClick = {
             onCheckoutClicked()
         }

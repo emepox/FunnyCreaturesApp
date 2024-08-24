@@ -27,7 +27,6 @@ object DataSourceFactoryImpl : DataSource {
         }
             .take(20)
             .toList()
-
 }
 
 object DataSourceImpl : DataSource {

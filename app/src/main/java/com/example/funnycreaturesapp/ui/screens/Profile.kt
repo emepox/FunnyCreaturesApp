@@ -13,10 +13,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -67,18 +70,23 @@ fun Profile(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
+                    .weight(1f),
+                colors = CardDefaults.cardColors(
+                     containerColor = MaterialTheme.colorScheme.secondary
+                ),
             ) {
                 Icon(
                     imageVector = Icons.Filled.AccountCircle,
                     contentDescription = stringResource(id = R.string.profile_picture),
+                    tint = Color.Black,
                     modifier = Modifier.size(100.dp),
                 )
                 Text(
                     text = stringResource(id = R.string.change_image),
+                    color = Color.Black,
                     modifier = Modifier
                         .padding(10.dp)
-                        .clickable { } // TODO
+                        .clickable { }
                 )
             }
             if (isSessionActive) {
@@ -86,7 +94,11 @@ fun Profile(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)
-                        .padding(start = 10.dp)
+                        .padding(start = 10.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.secondary,
+                        contentColor = Color.Black,
+                    )
                 ) {
 
                     Text(
@@ -132,7 +144,11 @@ fun Profile(
         }
 
         Card(
-            modifier = Modifier
+            modifier = Modifier,
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.secondary,
+                contentColor = Color.Black,
+            )
         ) {
             Text(
                 text = stringResource(id = R.string.change_data),
@@ -144,11 +160,16 @@ fun Profile(
             TextField(
                 value = username,
                 onValueChange = { username = it },
-                placeholder = { Text(
-                    text = stringResource(
-                        id = R.string.username
-                    ),
-                ) },
+                placeholder = {
+                    Text(
+                        text = stringResource(
+                            id = R.string.username
+                        ),
+                    )
+                },
+                colors = TextFieldDefaults.colors(
+                    unfocusedContainerColor = Color.Transparent
+                ),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 5.dp)
@@ -156,11 +177,16 @@ fun Profile(
             TextField(
                 value = email,
                 onValueChange = { email = it },
-                placeholder = { Text(
-                    text = stringResource(
-                        id = R.string.email
-                    ),
-                ) },
+                placeholder = {
+                    Text(
+                        text = stringResource(
+                            id = R.string.email
+                        ),
+                    )
+                },
+                colors = TextFieldDefaults.colors(
+                    unfocusedContainerColor = Color.Transparent
+                ),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 5.dp)
@@ -169,11 +195,16 @@ fun Profile(
             TextField(
                 value = password,
                 onValueChange = { password = it },
-                placeholder = { Text(
-                    text = stringResource(
-                        id = R.string.password
-                    ),
-                ) },
+                placeholder = {
+                    Text(
+                        text = stringResource(
+                            id = R.string.password
+                        ),
+                    )
+                },
+                colors = TextFieldDefaults.colors(
+                    unfocusedContainerColor = Color.Transparent
+                ),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 5.dp, end = 5.dp, bottom = 10.dp)

@@ -27,6 +27,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -80,7 +81,7 @@ fun Article(
 
                 Text(
                     text = state.price.toString() + stringResource(id = R.string.euro),
-                    fontSize = 40.sp,
+                    fontSize = 30.sp,
                     color = Color.Black,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(10.dp)
@@ -92,7 +93,7 @@ fun Article(
                         if (input.length <= 2 && input.isDigitsOnly())
                             amount = input
                     },
-                    modifier = Modifier.width(60.dp),
+                    modifier = Modifier.width(50.dp),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     singleLine = true,
                     placeholder = { 
@@ -105,14 +106,14 @@ fun Article(
                         onAddClicked(selectedArticle, amount.toInt())
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Green
+                        containerColor = MaterialTheme.colorScheme.primary
                     ),
                     modifier = Modifier,
                 ) {
                     Text(
                         text = stringResource(id = R.string.add),
                         fontSize = 20.sp,
-                        color = Color.Black,
+                        color = Color.White,
                         modifier = Modifier.padding(10.dp)
                     )
                 }
@@ -143,6 +144,7 @@ fun Article(
                 Icon(
                     imageVector = if (isFavourite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                     contentDescription = stringResource(id = R.string.is_favourite),
+                    tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier
                         .padding(10.dp)
                         .clickable {
@@ -184,6 +186,7 @@ fun Article(
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Filled.Star,
+                            tint = MaterialTheme.colorScheme.primary,
                             contentDescription = stringResource(id = R.string.rating),
                         )
                     },

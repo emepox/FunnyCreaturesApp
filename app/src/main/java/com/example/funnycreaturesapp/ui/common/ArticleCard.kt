@@ -1,5 +1,6 @@
 package com.example.funnycreaturesapp.ui.common
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,6 +18,7 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -50,6 +52,7 @@ fun ArticleCard(
     ) {
         Column(
             verticalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier.background(MaterialTheme.colorScheme.secondary)
         ) {
             Column {
                 Box(
@@ -67,6 +70,7 @@ fun ArticleCard(
                     Icon(
                         imageVector = if (isFavourite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                         contentDescription = stringResource(id = R.string.is_favourite),
+                        tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
                             .padding(10.dp)
                             .clickable {
@@ -81,6 +85,7 @@ fun ArticleCard(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 10.dp, vertical = 2.dp)
+
             ) {
                 Text(
                     text = item.name,
