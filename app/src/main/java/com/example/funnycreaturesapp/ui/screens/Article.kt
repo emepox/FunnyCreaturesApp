@@ -59,7 +59,6 @@ fun Article(
     onFavouriteClicked: (Article) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    println("TESTING - article- " + selectedArticle)
     Scaffold(
         bottomBar = {
             HorizontalDivider()

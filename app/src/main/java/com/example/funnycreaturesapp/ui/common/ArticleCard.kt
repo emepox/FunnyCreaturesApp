@@ -44,7 +44,6 @@ fun ArticleCard(
 ) {
     Card(
         onClick = {
-            println("TESTING - article card onclick - "+ item.name)
             onItemClicked(item.id)
         },
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 4.dp),

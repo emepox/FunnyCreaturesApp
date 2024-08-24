@@ -38,7 +38,6 @@ fun Articles(
                 item = articles[itemIndex],
                 onItemClicked = {
                     onItemClicked(articles[itemIndex].id)
-                    println("TESTING - onItemClicked - " + articles[itemIndex].name)
                 },
                 isFavourite = favouriteArticles.contains(articles[itemIndex]),
                 onFavouriteClicked = { favourite ->

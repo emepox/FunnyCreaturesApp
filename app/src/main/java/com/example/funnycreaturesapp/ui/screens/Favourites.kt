@@ -19,7 +19,6 @@ fun Favourites(
     onFavouriteClicked: (Article) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    println("TESTING - favourites - " + favouriteArticles)
     if (favouriteArticles.isEmpty()) {
         Text(
             text = stringResource(id = R.string.no_favourites),
