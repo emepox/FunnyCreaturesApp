@@ -2,7 +2,7 @@ package com.example.funnycreaturesapp.ui.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.funnycreaturesapp.models.ArticleUI
+import com.example.funnycreaturesapp.models.Article
 import com.example.funnycreaturesapp.models.Category
 import com.example.funnycreaturesapp.utils.AdvertisementCreator.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -10,10 +10,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlin.random.Random
 
-class HomeViewModel(listOfArticles: List<ArticleUI>) : ViewModel() {
+class HomeViewModel(listOfArticles: List<Article>) : ViewModel() {
 
     private val _articles = MutableStateFlow(listOfArticles)
-    val articles: StateFlow<List<ArticleUI>> = _articles.asStateFlow()
+    val articles: StateFlow<List<Article>> = _articles.asStateFlow()
 
     private val initialListOfArticles = listOfArticles
 
@@ -35,7 +35,7 @@ class HomeViewModel(listOfArticles: List<ArticleUI>) : ViewModel() {
     }
 
     companion object {
-        fun homeViewModelFactory(listOfArticles: List<ArticleUI>): ViewModelProvider.Factory {
+        fun homeViewModelFactory(listOfArticles: List<Article>): ViewModelProvider.Factory {
             return object : ViewModelProvider.Factory {
                 @Suppress("UNCHECKED_CAST")
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {

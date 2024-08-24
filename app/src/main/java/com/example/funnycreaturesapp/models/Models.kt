@@ -10,7 +10,7 @@ data class DataSourceArticle(
     val isInOffer: Boolean = false,
 )
 
-data class ArticleUI(
+data class Article(
     val id: String,
     val name: String,
     val category: Category,

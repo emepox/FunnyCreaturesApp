@@ -9,14 +9,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.funnycreaturesapp.R
-import com.example.funnycreaturesapp.models.ArticleUI
+import com.example.funnycreaturesapp.models.Article
 import com.example.funnycreaturesapp.ui.common.Articles
 
 @Composable
 fun Favourites(
-    favouriteArticles: List<ArticleUI>,
+    favouriteArticles: List<Article>,
     onItemClicked: () -> Unit,
-    onFavouriteClicked: (ArticleUI) -> Unit,
+    onFavouriteClicked: (Article) -> Unit,
     modifier: Modifier = Modifier
 ) {
     if(favouriteArticles.isEmpty()) {

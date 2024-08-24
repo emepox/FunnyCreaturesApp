@@ -11,7 +11,7 @@ import com.example.funnycreaturesapp.db.dataStore.SessionManager
 import com.example.funnycreaturesapp.db.room.AppDatabase
 import com.example.funnycreaturesapp.db.room.UserRepository
 import com.example.funnycreaturesapp.models.ArticleInCartModel
-import com.example.funnycreaturesapp.models.ArticleUI
+import com.example.funnycreaturesapp.models.Article
 import com.example.funnycreaturesapp.models.DataSourceArticle
 import com.example.funnycreaturesapp.models.UserSettings
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import com.example.funnycreaturesapp.utils.*
 
 class FunnyCreaturesAppViewModel(
     repository: List<DataSourceArticle>,
@@ -38,13 +39,13 @@ class FunnyCreaturesAppViewModel(
     val isSessionActive = _isSessionActive.asStateFlow()
 
     // ARTICLES
-    private var _articles = MutableStateFlow<List<ArticleUI>>(emptyList())
-    val articles: StateFlow<List<ArticleUI>> = _articles.asStateFlow()
-    private var _selectedArticle = MutableStateFlow<ArticleUI?>(null)
-    val selectedArticle: StateFlow<ArticleUI?> = _selectedArticle.asStateFlow()
+    private var _articles = MutableStateFlow<List<Article>>(emptyList())
+    val articles: StateFlow<List<Article>> = _articles.asStateFlow()
+    private var _selectedArticle = MutableStateFlow<Article?>(null)
+    val selectedArticle: StateFlow<Article?> = _selectedArticle.asStateFlow()
 
     // FAVOURITES
-    private var _favouriteArticles = MutableStateFlow<List<ArticleUI>>(emptyList())
+    private var _favouriteArticles = MutableStateFlow<List<Article>>(emptyList())
     val favouriteArticles = _favouriteArticles.asStateFlow()
 
     // CART
@@ -66,7 +67,7 @@ class FunnyCreaturesAppViewModel(
     }
 
     // CART
-    fun addArticleToCart(article: ArticleUI, amount: Int = 1) {
+    fun addArticleToCart(article: Article, amount: Int = 1) {
         val cartArticleModel = ListOfArticlesToCartModel.articleToCartArticle(article)
         // Check if element if in the list
         if (checkIfArticleIsInCart(cartArticleModel.id)) {
@@ -102,7 +103,7 @@ class FunnyCreaturesAppViewModel(
     fun reduceArticle(article: ArticleInCartModel) {
         val updatedArticles = _articlesInCart.value.map {
             if (it.id == article.id) {
-                it.copy(amount = it.amount.decreaseSafely())
+                it.copy(amount = it.amount.decreaseIntegerSafely())
             } else {
                 it
             }
@@ -134,7 +135,7 @@ class FunnyCreaturesAppViewModel(
 
 
     // FAVOURITES
-    fun onClickedFavourite(article: ArticleUI) {
+    fun onClickedFavourite(article: Article) {
         if (favouriteArticles.value.contains(article)) {
             removeFromFavourites(article)
         } else {
@@ -143,12 +144,12 @@ class FunnyCreaturesAppViewModel(
         onFavouritesChanges(_favouriteArticles.value)
     }
 
-    private fun addToFavourites(article: ArticleUI) {
+    private fun addToFavourites(article: Article) {
         _favouriteArticles.value += article
         onFavouritesChanges(_favouriteArticles.value)
     }
 
-    private fun removeFromFavourites(article: ArticleUI) {
+    private fun removeFromFavourites(article: Article) {
         _favouriteArticles.value -= article
         onFavouritesChanges(_favouriteArticles.value)
 
@@ -190,7 +191,7 @@ class FunnyCreaturesAppViewModel(
         checkCartArticlesAmount()
     }
 
-    private fun onFavouritesChanges(list: List<ArticleUI>) {
+    private fun onFavouritesChanges(list: List<Article>) {
         viewModelScope.launch {
             updateDatabaseFavouritesList(list)
         }
@@ -211,7 +212,7 @@ class FunnyCreaturesAppViewModel(
     }
 
 
-    private suspend fun updateDatabaseFavouritesList(list: List<ArticleUI>) {
+    private suspend fun updateDatabaseFavouritesList(list: List<Article>) {
         if (_isSessionActive.value) {
             _activeUser.value?.let { user ->
                 userRepository.updateFavourites(user.id, list)
@@ -251,10 +252,5 @@ class FunnyCreaturesAppViewModel(
                 }
             }
         }
-
-        private fun Int.decreaseSafely(): Int {
-            return if (this > 1) this - 1 else this
-        }
     }
-
 }

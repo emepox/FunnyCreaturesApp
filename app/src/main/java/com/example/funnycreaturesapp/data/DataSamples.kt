@@ -1,14 +1,13 @@
 package com.example.funnycreaturesapp.data
 
+import com.example.funnycreaturesapp.models.Article
 import com.example.funnycreaturesapp.models.ArticleInCartModel
-import com.example.funnycreaturesapp.models.ArticleUI
-import com.example.funnycreaturesapp.models.Category
 import com.example.funnycreaturesapp.models.Category.*
-import com.example.funnycreaturesapp.models.DataSourceArticle
+
 
 object DataSamples {
     val sampleOfUIArticles = listOf(
-        ArticleUI(
+        Article(
             id = "123",
             name = "Hominino",
             category = MONSTER,
@@ -18,7 +17,7 @@ object DataSamples {
             description = "Lorem Ipsum dolor",
             isInOffer = false,
         ),
-        ArticleUI(
+        Article(
             id = "234",
             name = "Draconino",
             category = MONSTER,
@@ -28,7 +27,7 @@ object DataSamples {
             description = "Lorem Ipsum dolor",
             isInOffer = false,
         ),
-        ArticleUI(
+        Article(
             id = "123",
             name = "Hominino",
             category = MONSTER,

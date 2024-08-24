@@ -10,3 +10,7 @@ fun Double.roundDouble(): Double {
 
 fun String.capitaliseFirstChar(): String =
     this.lowercase().replaceFirstChar { it.uppercaseChar() }
+
+fun Int.decreaseIntegerSafely(): Int {
+    return if (this > 1) this - 1 else this
+}

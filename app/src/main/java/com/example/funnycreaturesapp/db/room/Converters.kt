@@ -2,7 +2,7 @@ package com.example.funnycreaturesapp.db.room
 
 import androidx.room.TypeConverter
 import com.example.funnycreaturesapp.models.ArticleInCartModel
-import com.example.funnycreaturesapp.models.ArticleUI
+import com.example.funnycreaturesapp.models.Article
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -12,14 +12,14 @@ class Converters {
 
     // Favourites
     @TypeConverter
-    fun fromArticleUIList(value: List<ArticleUI>): String {
-        val type = object : TypeToken<List<ArticleUI>>() {}.type
+    fun fromArticleUIList(value: List<Article>): String {
+        val type = object : TypeToken<List<Article>>() {}.type
         return gson.toJson(value, type)
     }
 
     @TypeConverter
-    fun toArticleUIList(value: String): List<ArticleUI> {
-        val type = object : TypeToken<List<ArticleUI>>() {}.type
+    fun toArticleUIList(value: String): List<Article> {
+        val type = object : TypeToken<List<Article>>() {}.type
         return gson.fromJson(value, type)
     }
 

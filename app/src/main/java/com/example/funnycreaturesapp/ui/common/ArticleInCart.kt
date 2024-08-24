@@ -30,7 +30,6 @@ import coil.compose.AsyncImage
 import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.data.DataSamples
 import com.example.funnycreaturesapp.models.ArticleInCartModel
-import com.example.funnycreaturesapp.utils.RemoteImageUploader
 
 @Composable
 fun ArticleInCart(

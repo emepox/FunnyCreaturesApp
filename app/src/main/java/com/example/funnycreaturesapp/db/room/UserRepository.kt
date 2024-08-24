@@ -1,7 +1,7 @@
 package com.example.funnycreaturesapp.db.room
 
 import com.example.funnycreaturesapp.models.ArticleInCartModel
-import com.example.funnycreaturesapp.models.ArticleUI
+import com.example.funnycreaturesapp.models.Article
 import com.example.funnycreaturesapp.models.UserSettings
 
 class UserRepository(private val userDao: UserDao) {
@@ -18,7 +18,7 @@ class UserRepository(private val userDao: UserDao) {
             userDao.updateUser(user.copy(cart = newCartList))
         }
     }
-    suspend fun updateFavourites(userId: Int, newFavouritesList: List<ArticleUI>) {
+    suspend fun updateFavourites(userId: Int, newFavouritesList: List<Article>) {
         userDao.getUserById(userId)?.let { user ->
             userDao.updateUser(user.copy(favourites = newFavouritesList))
         }

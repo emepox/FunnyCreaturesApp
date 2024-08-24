@@ -1,11 +1,11 @@
 package com.example.funnycreaturesapp.data.mappers
 
 import com.example.funnycreaturesapp.models.ArticleInCartModel
-import com.example.funnycreaturesapp.models.ArticleUI
+import com.example.funnycreaturesapp.models.Article
 
 object ListOfArticlesToCartModel {
 
-    fun articleToCartArticle(article: ArticleUI): ArticleInCartModel =
+    fun articleToCartArticle(article: Article): ArticleInCartModel =
         ArticleInCartModel(
             id = article.id,
             name = article.name,

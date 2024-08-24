@@ -14,17 +14,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.funnycreaturesapp.R
-import com.example.funnycreaturesapp.models.ArticleUI
+import com.example.funnycreaturesapp.models.Article
 import com.example.funnycreaturesapp.ui.common.Articles
 import com.example.funnycreaturesapp.ui.viewModels.SearchViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Search(
-    listOfArticles: List<ArticleUI>,
+    listOfArticles: List<Article>,
     onItemClicked: () -> Unit,
-    onFavouriteClicked: (ArticleUI) -> Unit,
-    favouritesList: List<ArticleUI>,
+    onFavouriteClicked: (Article) -> Unit,
+    favouritesList: List<Article>,
     modifier: Modifier = Modifier,
 ) {
     val viewModel: SearchViewModel =

@@ -33,14 +33,14 @@ import coil.imageLoader
 import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.data.DataSourceImpl
 import com.example.funnycreaturesapp.data.mappers.DataSourceArticleToUiArticle
-import com.example.funnycreaturesapp.models.ArticleUI
+import com.example.funnycreaturesapp.models.Article
 
 @Composable
 fun ArticleCard(
     onItemClicked: (String) -> Unit,
-    item: ArticleUI,
+    item: Article,
     isFavourite: Boolean,
-    onFavouriteClicked: (ArticleUI) -> Unit,
+    onFavouriteClicked: (Article) -> Unit,
 ) {
     Card(
         onClick = {

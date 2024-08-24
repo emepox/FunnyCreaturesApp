@@ -11,5 +11,5 @@ data class UserSettings(
     @ColumnInfo(name = "password") val password: String? = null,
     @ColumnInfo(name = "email") val email: String? = null,
     @ColumnInfo(name = "cart") val cart: List<ArticleInCartModel> = emptyList(),
-    @ColumnInfo(name = "favourites") val favourites: List<ArticleUI> = emptyList()
+    @ColumnInfo(name = "favourites") val favourites: List<Article> = emptyList()
 )

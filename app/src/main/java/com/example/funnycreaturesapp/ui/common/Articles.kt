@@ -11,14 +11,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.funnycreaturesapp.data.DataSourceImpl
 import com.example.funnycreaturesapp.data.mappers.DataSourceArticleToUiArticle
-import com.example.funnycreaturesapp.models.ArticleUI
+import com.example.funnycreaturesapp.models.Article
 
 @Composable
 fun Articles(
-    articles: List<ArticleUI>,
+    articles: List<Article>,
     onItemClicked: (String) -> Unit,
-    favouriteArticles: List<ArticleUI>,
-    onFavouriteClicked: (ArticleUI) -> Unit,
+    favouriteArticles: List<Article>,
+    onFavouriteClicked: (Article) -> Unit,
     modifier: Modifier = Modifier,
 ) {
 

@@ -49,14 +49,14 @@ import androidx.core.text.isDigitsOnly
 import coil.compose.AsyncImage
 import coil.imageLoader
 import com.example.funnycreaturesapp.R
-import com.example.funnycreaturesapp.models.ArticleUI
+import com.example.funnycreaturesapp.models.Article
 
 @Composable
 fun Article(
-    selectedArticle: ArticleUI,
-    onAddClicked: (ArticleUI, Int) -> Unit,
+    selectedArticle: Article,
+    onAddClicked: (Article, Int) -> Unit,
     isFavourite: Boolean,
-    onFavouriteClicked: (ArticleUI) -> Unit,
+    onFavouriteClicked: (Article) -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
