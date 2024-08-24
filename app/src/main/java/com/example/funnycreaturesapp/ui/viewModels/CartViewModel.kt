@@ -3,6 +3,7 @@ package com.example.funnycreaturesapp.ui.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.funnycreaturesapp.models.ArticleInCartModel
+import com.example.funnycreaturesapp.utils.roundDouble
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
@@ -34,10 +35,10 @@ class CartViewModel(
     }
 
     private fun updateTotals() {
-        _subtotal.value = _listOfArticles.value.sumOf { it.amount * it.price }
-        _discount.value = (_subtotal.value * 25) / 100
+        _subtotal.value = _listOfArticles.value.sumOf { it.amount * it.price }.roundDouble()
+        _discount.value = ((_subtotal.value * 25) / 100).roundDouble()
         _shippingCosts.value = SHIPPING
-        _total.value = _subtotal.value + _shippingCosts.value - _discount.value
+        _total.value = (_subtotal.value + _shippingCosts.value - _discount.value).roundDouble()
     }
 
     companion object {

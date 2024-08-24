@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -64,7 +65,7 @@ fun NavBar(
         Icon(
             imageVector = Icons.Filled.AccountCircle,
             contentDescription = stringResource(id = R.string.profile),
-            tint = if (activeSession) Color.Red else Color.Black,
+            tint = if (activeSession) MaterialTheme.colorScheme.primary else Color.Black,
             modifier = modifier
                 .size(30.dp)
                 .clickable {

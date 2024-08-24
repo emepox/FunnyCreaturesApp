@@ -32,7 +32,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -47,12 +46,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.imageLoader
 import com.example.funnycreaturesapp.R
 import com.example.funnycreaturesapp.models.ArticleUI
-import com.example.funnycreaturesapp.ui.viewModels.ArticleViewModel
 
 @Composable
 fun Article(
@@ -62,11 +59,6 @@ fun Article(
     onFavouriteClicked: (ArticleUI) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-
-    val viewModel: ArticleViewModel =
-        viewModel(factory = ArticleViewModel.articleViewModelFactory(selectedArticle))
-
-    val state by viewModel.articleUI.collectAsState()
 
     Scaffold(
         bottomBar = {
@@ -80,7 +72,7 @@ fun Article(
                 var amount by remember { mutableStateOf("1") }
 
                 Text(
-                    text = state.price.toString() + stringResource(id = R.string.euro),
+                    text = selectedArticle.price.toString() + stringResource(id = R.string.euro),
                     fontSize = 30.sp,
                     color = Color.Black,
                     fontWeight = FontWeight.Bold,
@@ -160,10 +152,10 @@ fun Article(
                     .fillMaxWidth()
             ) {
                 Text(
-                    text = state.name,
+                    text = selectedArticle.name,
                     fontSize = 25.sp,
                 )
-                if (state.isInOffer) {
+                if (selectedArticle.isInOffer) {
                     Card(
                         colors = CardDefaults.cardColors(
                             containerColor = Color.Red,
@@ -181,7 +173,7 @@ fun Article(
                 AssistChip(
                     onClick = { },
                     label = {
-                        Text(text = state.rating)
+                        Text(text = selectedArticle.rating)
                     },
                     leadingIcon = {
                         Icon(
@@ -192,7 +184,7 @@ fun Article(
                     },
                 )
             }
-            Text(text = state.description)
+            Text(text = selectedArticle.description)
 
         }
 

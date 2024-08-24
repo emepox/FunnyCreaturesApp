@@ -5,8 +5,8 @@ import com.example.funnycreaturesapp.models.Category
 import com.example.funnycreaturesapp.models.DataSourceArticle
 import com.example.funnycreaturesapp.models.Food
 import com.example.funnycreaturesapp.models.Monsters
-import java.math.RoundingMode
 import kotlin.random.Random
+import com.example.funnycreaturesapp.utils.*
 
 class ProductFactory {
 
@@ -15,10 +15,10 @@ class ProductFactory {
         val randomName = randomName(randomCategory)
 
         return DataSourceArticle(
-            name = randomName.name.toFormat(),
+            name = randomName.name.capitaliseFirstChar(),
             category = randomCategory,
-            price = Random.nextDouble(100.00, 3000.00).rounding(),
-            rating = Random.nextDouble(0.0, 10.0).rounding(),
+            price = Random.nextDouble(100.00, 3000.00).roundDouble(),
+            rating = Random.nextDouble(0.0, 10.0).roundDouble(),
             img = randomName.name.lowercase(),
             description = assignDescription(randomName),
             isInOffer = Random.nextBoolean(),
@@ -51,14 +51,4 @@ class ProductFactory {
             }
             else -> "Unknown item"
         }
-
-    private fun Double.rounding(): Double {
-        return this.toBigDecimal()
-            .setScale(2, RoundingMode.UP)
-            .toDouble()
-    }
-
-    private fun String.toFormat(): String =
-        this.lowercase().replaceFirstChar { it.uppercaseChar() }
-
 }

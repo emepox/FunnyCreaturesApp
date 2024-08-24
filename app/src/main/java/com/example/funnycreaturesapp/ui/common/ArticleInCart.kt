@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -48,8 +49,9 @@ fun ArticleInCart(
             .padding(vertical = 10.dp),
     ) {
         AsyncImage(
-            model = RemoteImageUploader.uploadRemoteImage(article.img),
+            model = article.img,
             contentDescription = article.img,
+            modifier = Modifier.border(2.dp, color = MaterialTheme.colorScheme.primary)
         )
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
