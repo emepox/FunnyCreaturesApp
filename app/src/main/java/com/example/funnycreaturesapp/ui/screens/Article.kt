@@ -59,7 +59,7 @@ fun Article(
     onFavouriteClicked: (Article) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-
+    println("TESTING - article- " + selectedArticle)
     Scaffold(
         bottomBar = {
             HorizontalDivider()
@@ -104,9 +104,9 @@ fun Article(
                 ) {
                     Text(
                         text = stringResource(id = R.string.add),
-                        fontSize = 20.sp,
+                        fontSize = 15.sp,
                         color = Color.White,
-                        modifier = Modifier.padding(10.dp)
+                        modifier = Modifier.padding(5.dp)
                     )
                 }
             }

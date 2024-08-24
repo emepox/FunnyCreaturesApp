@@ -49,7 +49,12 @@ fun FunnyCreaturesApp(
     // Data
     val sourceArticles: List<DataSourceArticle> = DataSourceFactoryImpl.dataSourceArticles
     val viewModel: FunnyCreaturesAppViewModel =
-        viewModel(factory = FunnyCreaturesAppViewModel.funnyCreaturesAppViewModelFactory(sourceArticles, application))
+        viewModel(
+            factory = FunnyCreaturesAppViewModel.funnyCreaturesAppViewModelFactory(
+                sourceArticles,
+                application
+            )
+        )
     // User settings
     val isSessionActive by viewModel.isSessionActive.collectAsState()
     val userSettingsViewModel: UserSettingsViewModel =
@@ -117,7 +122,10 @@ fun FunnyCreaturesApp(
                 content = {
                     Search(
                         listOfArticles = articles,
-                        onItemClicked = { navController.navigate(FunnyCreaturesAppScreens.Article.name) },
+                        onItemClicked = { article ->
+                            viewModel.selectArticle(article)
+                            navController.navigate(FunnyCreaturesAppScreens.Article.name)
+                        },
                         onFavouriteClicked = { article ->
                             viewModel.onClickedFavourite(article)
                         },
@@ -130,7 +138,10 @@ fun FunnyCreaturesApp(
                 content = {
                     Favourites(
                         favouriteArticles = favouriteArticles,
-                        onItemClicked = { navController.navigate(FunnyCreaturesAppScreens.Article.name) },
+                        onItemClicked = { article ->
+                            viewModel.selectArticle(article)
+                            navController.navigate(FunnyCreaturesAppScreens.Article.name)
+                        },
                         onFavouriteClicked = { article ->
                             viewModel.onClickedFavourite(article)
                         }

@@ -22,7 +22,7 @@ import com.example.funnycreaturesapp.ui.viewModels.SearchViewModel
 @Composable
 fun Search(
     listOfArticles: List<Article>,
-    onItemClicked: () -> Unit,
+    onItemClicked: (String) -> Unit,
     onFavouriteClicked: (Article) -> Unit,
     favouritesList: List<Article>,
     modifier: Modifier = Modifier,
@@ -48,11 +48,13 @@ fun Search(
             )
         },
         expanded = true,
-        onExpandedChange = { expanded = it},
+        onExpandedChange = { expanded = it },
     ) {
         Articles(
             articles = viewModel.filterArticlesWhileTyping(query),
-            onItemClicked = { onItemClicked() },
+            onItemClicked = { article ->
+                onItemClicked(article)
+            },
             onFavouriteClicked = onFavouriteClicked,
             favouriteArticles = favouritesList,
         )

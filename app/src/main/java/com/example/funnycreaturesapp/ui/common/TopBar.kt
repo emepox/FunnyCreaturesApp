@@ -54,7 +54,7 @@ fun TopBar(
             Text(
                 text = stringResource(id = R.string.app_name),
                 fontWeight = FontWeight.Bold,
-                letterSpacing = 10.sp,
+                letterSpacing = 5.sp,
                 textAlign = TextAlign.Center,
                 fontFamily = FontFamily.Monospace,
                 color = Color.White,

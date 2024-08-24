@@ -15,11 +15,12 @@ import com.example.funnycreaturesapp.ui.common.Articles
 @Composable
 fun Favourites(
     favouriteArticles: List<Article>,
-    onItemClicked: () -> Unit,
+    onItemClicked: (String) -> Unit,
     onFavouriteClicked: (Article) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    if(favouriteArticles.isEmpty()) {
+    println("TESTING - favourites - " + favouriteArticles)
+    if (favouriteArticles.isEmpty()) {
         Text(
             text = stringResource(id = R.string.no_favourites),
             textAlign = TextAlign.Center,
@@ -30,7 +31,9 @@ fun Favourites(
     }
     Articles(
         articles = favouriteArticles,
-        onItemClicked = { onItemClicked() },
+        onItemClicked = { article ->
+            onItemClicked(article)
+        },
         favouriteArticles = favouriteArticles,
         onFavouriteClicked = onFavouriteClicked,
     )
