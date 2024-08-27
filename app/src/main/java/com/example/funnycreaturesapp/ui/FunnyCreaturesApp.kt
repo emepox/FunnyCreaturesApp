@@ -5,7 +5,11 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -78,19 +82,22 @@ fun FunnyCreaturesApp(
                 },
                 modifier = Modifier
                     .fillMaxWidth()
+                    .statusBarsPadding()
             )
         },
         bottomBar = {
             NavBar(
                 navController = navController,
                 activeSession = isSessionActive,
-                Modifier.padding(top = 5.dp)
+                Modifier
+                    .padding(top = 5.dp)
+                    .navigationBarsPadding()
             )
         },
-        contentWindowInsets = WindowInsets(0.dp),
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 20.dp, vertical = 40.dp)
+            .padding(horizontal = 20.dp,)
+            .windowInsetsPadding(WindowInsets.statusBars)
     ) { innerPadding ->
 
         NavHost(
